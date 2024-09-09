@@ -1,0 +1,86 @@
+name: Track development time
+
+on:
+  issues:
+    types: [opened, closed]
+permissions:
+  issues: write
+
+jobs:
+  onOpen:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'issues' && github.event.action == 'opened'
+    steps:
+      - name: Set TZ
+        uses: szenius/set-timezone@v2.0
+        with:
+          timezoneLinux: "Europe/Paris"
+          timezoneMacos: "Europe/Paris"
+          timezoneWindows: "W. Europe Standard Time"
+      - name: Format Open Time
+        id: format
+        run: |
+          OPEN_TIME=$(date -d "${{ github.event.issue.created_at }}" +"%d-%m-%Y %H:%M:%S")
+          echo "open_time=$OPEN_TIME" >> $GITHUB_OUTPUT
+      - name: Append Issue Body
+        uses: julien-deramond/update-issue-body@v1
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            ## Issue opened at ${{ steps.format.outputs.open_time }} 
+            [${{ github.event.issue.created_at }}]
+          edit-mode: append
+          append-separator: newline
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  onClosed:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'issues' && github.event.action == 'closed'
+    steps:
+      - name: Set TZ
+        uses: szenius/set-timezone@v2.0
+        with:
+          timezoneLinux: "Europe/Paris"
+          timezoneMacos: "Europe/Paris"
+          timezoneWindows: "W. Europe Standard Time"
+      - name: Extract Open Time
+        id: extract
+        run: |
+          OPEN_TIME=$(echo "${{ github.event.issue.body }}" | grep -oP '\[\K[^]]*')
+          echo "open_time=$OPEN_TIME" >> $GITHUB_OUTPUT
+      - name: Format Closed Time
+        id: format
+        run: |
+          CLOSED_TIME=$(date -d "${{ github.event.issue.closed_at }}" +"%d-%m-%Y %H:%M:%S")
+          echo "closed_time=$CLOSED_TIME" >> $GITHUB_OUTPUT
+      - name: Calculate Time Spent
+        id: calculate
+        run: |
+          OPEN_TIME=$(echo "${{ steps.extract.outputs.open_time }}" | sed 's/T/ /' | sed 's/Z//')
+          CLOSED_TIME=$(echo "${{ github.event.issue.closed_at }}" | sed 's/T/ /' | sed 's/Z//')
+          TIME_SPENT=$(($(date -d "$CLOSED_TIME" +%s) - $(date -d "$OPEN_TIME" +%s)))
+
+          if [ $TIME_SPENT -lt 60 ]; then
+            TIME_SPENT_FORMATTED="${TIME_SPENT} seconds"
+          elif [ $TIME_SPENT -lt 3600 ]; then
+            TIME_SPENT_FORMATTED=$(date -u -d @${TIME_SPENT} +"%M minutes %S seconds")
+          elif [ $TIME_SPENT -lt 86400 ]; then
+            TIME_SPENT_FORMATTED=$(date -u -d @${TIME_SPENT} +"%H hours %M minutes")
+          else
+            DAYS=$((TIME_SPENT / 86400))
+            REMAINDER=$((TIME_SPENT % 86400))
+            TIME_SPENT_FORMATTED="${DAYS} days $(date -u -d @${REMAINDER} +"%H hours %M minutes")"
+          fi
+
+          echo "time_spent=$TIME_SPENT_FORMATTED" >> $GITHUB_OUTPUT
+      - name: Append Issue Body
+        uses: julien-deramond/update-issue-body@v1
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            ## Issue closed at ${{ steps.format.outputs.closed_time }}
+            Time spent: ${{ steps.calculate.outputs.time_spent }}
+            [${{ github.event.issue.closed_at }}]
+          edit-mode: append
+          append-separator: newline
+          token: ${{ secrets.GITHUB_TOKEN }}
