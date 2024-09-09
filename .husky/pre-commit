@@ -1,5 +1,5 @@
 if [[ "$OSTYPE" == "msys" ]]; then
-        cd front && npm.cmd run lint #:fix
+        cd front && npm.cmd run lint-build #:fix
 else
-        cd front && npm run lint #:fix
+        cd front && npm run lint-build #:fix
 fi

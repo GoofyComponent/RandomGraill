@@ -1,10 +1,20 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import './index.css';
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
+import { Button } from './components/ui/button';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    <div>
+      <Button
+        onClick={() => {
+          alert('Hello, world!');
+        }}
+      >
+        Click me
+      </Button>
+    </div>
   </React.StrictMode>,
-)
+);
