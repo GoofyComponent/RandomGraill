@@ -20,11 +20,19 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
+    //Shadcn UI
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+
+    // Typesaurus
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    //Manually added
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"],
+  "include": ["src", "firebaseCredentials.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
