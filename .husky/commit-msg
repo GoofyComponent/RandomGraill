@@ -1,0 +1,5 @@
+if [[ "$OSTYPE" == "msys" ]]; then
+        npx.cmd --no -- commitlint --edit ${1}
+else
+        npx --no -- commitlint --edit ${1}
+fi
