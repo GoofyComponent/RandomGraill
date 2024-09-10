@@ -7,11 +7,14 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
     "preview": "vite preview",
     "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/icon.png"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-toast": "^1.2.1",
+    "@tanstack/react-query": "^5.55.4",
     "@tanstack/react-router": "^1.46.2",
     "@typesaurus/react": "^6.0.1",
     "class-variance-authority": "^0.7.0",
@@ -23,9 +26,11 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",
+    "react-icons": "^5.3.0",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
-    "typesaurus": "^10.7.0"
+    "typesaurus": "^10.7.0",
+    "zustand": "^4.5.5"
   },
   "devDependencies": {
     "@tanstack/router-devtools": "^1.46.2",
