@@ -1,14 +1,15 @@
-import { VitePWA } from "vite-plugin-pwa";
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import path from "path";
+import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+import { defineConfig } from 'vite';
+import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: "prompt",
+      registerType: 'prompt',
       injectRegister: false,
 
       pwaAssets: {
@@ -19,27 +20,28 @@ export default defineConfig({
       manifest: {
         name: "RandomGraill'",
         short_name: "RandomGraill'",
-        description: "Find where to eat easily",
-        theme_color: "#ffffff",
+        description: 'Find where to eat easily',
+        theme_color: '#ffffff',
       },
 
       workbox: {
-        globPatterns: ["**/*.{js,css,html,svg,png,ico}"],
+        globPatterns: ['**/*.{js,css,html,svg,png,ico}'],
         cleanupOutdatedCaches: true,
         clientsClaim: true,
       },
 
       devOptions: {
         enabled: true,
-        navigateFallback: "index.html",
+        navigateFallback: 'index.html',
         suppressWarnings: true,
-        type: "module",
+        type: 'module',
       },
     }),
+    TanStackRouterVite(),
   ],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      '@': path.resolve(__dirname, './src'),
     },
   },
 });

@@ -1,3 +1,5 @@
+//This is the popup that will show when the app is ready to work offline or when there is new content available.
+
 import './PWABadge.css';
 
 import { useRegisterSW } from 'virtual:pwa-register/react';
