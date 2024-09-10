@@ -121,3 +121,5 @@ Les fichiers de configuration Firebase necessaires au déploiement sont :
 This is a text.
 
 </details>
+
+.
