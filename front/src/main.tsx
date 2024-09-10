@@ -1,20 +1,28 @@
-import './index.css';
+import '@/assets/styles/index.css';
 
-import React from 'react';
+import { createRouter, RouterProvider } from '@tanstack/react-router';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
+import { HelmetProvider } from 'react-helmet-async';
 
-import { Button } from './components/ui/button';
+// Import the generated route tree
+import { routeTree } from './routeTree.gen';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <div>
-      <Button
-        onClick={() => {
-          alert('Hello, world!');
-        }}
-      >
-        Click me
-      </Button>
-    </div>
-  </React.StrictMode>,
-);
+const router = createRouter({ routeTree });
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router;
+  }
+}
+
+const rootElement = document.getElementById('root')!;
+if (!rootElement.innerHTML) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <StrictMode>
+      <HelmetProvider>
+        <RouterProvider router={router} />
+      </HelmetProvider>
+    </StrictMode>,
+  );
+}
