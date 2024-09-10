@@ -10,11 +10,11 @@ module.exports = {
   ignorePatterns: ['dist', '.eslintrc.cjs', 'tailwind.config.js', 'src/components/ui'],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh', 'simple-import-sort', 'prettier'],
-    rules: {
+  rules: {
     'prettier/prettier': ['error', {}, { usePrettierrc: true }],
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
     '@typescript-eslint/no-unused-vars': ['error'],
   },
-}
+};
