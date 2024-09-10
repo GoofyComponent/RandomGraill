@@ -31,7 +31,10 @@
     },
     //Typesaurus
     "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true
+    "exactOptionalPropertyTypes": true,
+    //Personnal
+    "forceConsistentCasingInFileNames": true,
+    "types": ["vite-plugin-pwa/client"]
   },
   "include": ["src", "firebaseCredentials.ts", "vite.config.mts"],
   "exclude": ["node_modules", "dist"]
