@@ -31,7 +31,7 @@
     },
     //Typesaurus
     "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": false,
+    "exactOptionalPropertyTypes": true,
     //Personnal
     "forceConsistentCasingInFileNames": true,
     "types": ["vite-plugin-pwa/client"]

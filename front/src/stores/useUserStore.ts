@@ -9,7 +9,7 @@ interface AuthState {
   logout: () => void;
 }
 
-const useAuthStore = create<AuthState>(
+const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       user: null, // Par défaut, l'utilisateur est non connecté
