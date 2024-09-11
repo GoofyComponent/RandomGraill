@@ -1,4 +1,5 @@
 import CardResto from '@/components/project/cardResto';
+import CardRoulette from '@/components/project/cardRoulette';
 import { Button } from '@/components/ui/button';
 
 export const Example = () => {
@@ -14,6 +15,21 @@ export const Example = () => {
         variant="default"
         clickable={true}
       />
+      <div className="flex">
+        <CardRoulette
+          name="Roulette Hetic"
+          url="/restaurant/le-petit-bistro"
+          variant="default"
+          clickable={true}
+        />
+        <CardRoulette
+          name="Ajouter une roulette"
+          url="/add-roulette"
+          variant="default"
+          usage="add"
+          clickable={true}
+        />
+      </div>
     </div>
   );
 };
