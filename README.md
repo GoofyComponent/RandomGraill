@@ -10,9 +10,11 @@ RandomGraill est une application qui vous permet de rechercher des restaurants a
 
 ## Installation
 
-1. Créez un fichier `firebaseCredentials.ts` a la racine du projet et ajoutez-y la configuration du projet Firebase. Le contenu est sur discord. 
+1. Copier le fichier (front/)`firebaseCredentials.example` et renommez le (front/)`firebaseCredentials.ts` et ajoutez-y la configuration du projet Firebase.
+   La configuration est sur discord.
 
 ```typescript
+//front/firebaseCredentials.example
 export const firebaseConfig = {
 apiKey
 authDomain
@@ -24,8 +26,6 @@ appId
 
 export const functionsURL = '';
 
-export const stripePublicKey = '';
-
 export const DB_NAME = null;
 ```
 
@@ -33,13 +33,26 @@ export const DB_NAME = null;
 
 ```bash
 npm install
+cd front && npm install
 ```
 
 3. Lancez le serveur de développement
 
-   ```bash
-    npm run dev
-   ```
+```bash
+  npm run dev
+```
+
+4. Lancez le build du front
+
+```bash
+  npm run build
+```
+
+5. Prévisualisez l'application
+
+```bash
+  npm run preview
+```
 
 ## Conventions
 
@@ -68,50 +81,10 @@ La liste des types disponibles est :
 
 ## Déploiement
 
-Le déploiement de l'application se fait automatiquement à chaque push sur la branche `prod` via GitHub Actions.
+Le déploiement de l'application se fait automatiquement à chaque push sur la branche `main` via GitHub Actions.
 Les clés secrètes necessaires au déploiement sont :
 
-- `FIREBASE_SERVICE_ACCOUNT_WRPLNKR` : La valeur de la clé de service Firebase (via Google Cloud Platform)
-
-Les fichiers de configuration Firebase necessaires au déploiement sont :
-
-- `prod.firebase.json`
-- `prod.firebaserc`
-
-### Example de fichier `prod.firebase.json`
-
-```json
-{
-  "hosting": [
-    {
-      "site": "hosting_target",
-      "source": ".",
-      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-      "frameworksBackend": {
-        "region": "europe-west1"
-      }
-    },
-    ...
-  ]
-}
-```
-
-### Exemple de fichier `prod.firebaserc`
-
-```json
-{
-  "projects": {
-    "default": "<project-id>"
-  },
-  "targets": {
-    "<project-id>": {
-      "hosting": {
-        "<target>": ["<site-name>"]
-      }
-    }
-  }
-}
-```
+- `FIREBASE_SERVICE_ACCOUNT_[FIREBASEPROJECTNAME]` : La valeur de la clé de service Firebase (via Google Cloud Platform)
 
 ## Changelogs
 
