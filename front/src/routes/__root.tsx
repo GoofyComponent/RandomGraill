@@ -1,6 +1,22 @@
-import { createRootRoute, Outlet } from '@tanstack/react-router';
+import { createRootRoute, Outlet, redirect } from '@tanstack/react-router';
 import React, { Suspense } from 'react';
+
+import { auth } from '@/lib/firebase';
 export const Route = createRootRoute({
+  beforeLoad: async ({ location }) => {
+    await auth.authStateReady();
+    if (!auth.currentUser && location.pathname !== '/login') {
+      throw redirect({
+        to: '/login',
+      });
+    }
+
+    if (location.pathname === '/') {
+      throw redirect({
+        to: '/dashboard',
+      });
+    }
+  },
   component: () => (
     <>
       <Outlet />
