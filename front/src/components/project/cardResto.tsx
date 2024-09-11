@@ -42,7 +42,7 @@ const CardResto: React.FC<CardRestoProps> = ({
         style={{ backgroundImage: `url(${bgImage})` }}
       />
       <CardContent className="relative z-20 flex h-full flex-col justify-between p-0 text-white">
-        <h3 className="text-xxs font-bold md:text-xs">
+        <h3 className="text-xxs md:text-xs">
           <span
             className={`${headerBgColor} inline-block rounded-lg rounded-bl-none rounded-tr-none px-2 py-1`}
           >
