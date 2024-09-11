@@ -1,53 +1,8 @@
 import CardResto from '@/components/project/cardResto';
-import CardRoulette from '@/components/project/cardRoulette';
 import CarouselCard from '@/components/project/carouselCard';
 import { Button } from '@/components/ui/button';
 
 export const Example = () => {
-  const items = [
-    {
-      id: 1,
-      title: 'Roulette Hetic',
-      url: '/restaurant/le-petit-bistro',
-      imageUrl:
-        'https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg',
-    },
-    {
-      id: 2,
-      title: 'Roulette Hetic',
-      url: '/restaurant/le-petit-bistro',
-      imageUrl:
-        'https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg',
-    },
-    {
-      id: 3,
-      title: 'Roulette Hetic',
-      url: '/restaurant/le-petit-bistro',
-      imageUrl:
-        'https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg',
-    },
-    {
-      id: 4,
-      title: 'Roulette Hetic',
-      url: '/restaurant/le-petit-bistro',
-      imageUrl:
-        'https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg',
-    },
-    {
-      id: 5,
-      title: 'Roulette Hetic',
-      url: '/restaurant/le-petit-bistro',
-      imageUrl:
-        'https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg',
-    },
-    {
-      id: 6,
-      title: 'Roulette Hetic',
-      url: '/restaurant/le-petit-bistro',
-      imageUrl:
-        'https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg',
-    },
-  ];
   const itemResto = [
     {
       id: 1,
