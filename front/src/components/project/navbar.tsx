@@ -1,12 +1,18 @@
-import { useState, useEffect } from 'react';
 import { useRouter, useRouterState } from '@tanstack/react-router';
+import { useLoaderData } from '@tanstack/react-router';
+import { useEffect, useState } from 'react';
 
 import logo from '@/assets/images/logo-simple.svg';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const Navbar = () => {
   const [isHomePage, setIsHomePage] = useState(false);
   const { history } = useRouter();
   const router = useRouterState();
+  const { userData } = useLoaderData({
+    from: '/_auth',
+  });
+  const userFallback = userData.displayName.slice(0, 3);
 
   useEffect(() => {
     if (router.location.pathname === '/home') {
@@ -39,13 +45,10 @@ const Navbar = () => {
           <div></div>
         )}
         <img src={logo} alt="Logo" className="h-12 w-12" />
-        <a>
-          <img
-            src="https://via.placeholder.com/40" // Remplacer par l'URL de l'image de l'utilisateur connecté
-            alt="User Icon"
-            className="h-10 w-10 rounded-full border border-gray-300"
-          />
-        </a>
+        <Avatar className="h-10 w-10 rounded-full border border-gray-300">
+          <AvatarImage src={userData.photoURL} />
+          <AvatarFallback>{userFallback}</AvatarFallback>
+        </Avatar>
       </div>
     </nav>
   );
