@@ -84,6 +84,9 @@ module.exports = {
         fadeIn: 'fadeIn 0.5s ease-in-out forwards',
         fadeOut: 'fadeOut 0.5s ease-in-out forwards',
       },
+      fontSize: {
+        xxs: '10px',
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],
