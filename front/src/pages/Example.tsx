@@ -1,5 +1,3 @@
-import { f } from '@vite-pwa/assets-generator/dist/shared/assets-generator.5e51fd40.mjs';
-
 import CardResto from '@/components/project/cardResto';
 import { Button } from '@/components/ui/button';
 
@@ -10,7 +8,7 @@ export const Example = () => {
       <Button>Ceci est un button shadcn</Button>
       <CardResto
         bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
-        name="Le Petit Bistro"
+        name="Mcdo"
         distance="500m"
         url="/restaurant/le-petit-bistro"
         variant="default"
