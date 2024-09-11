@@ -1,9 +1,11 @@
 import CardResto from '@/components/project/cardResto';
+import Navbar from '@/components/project/navbar';
 import { Button } from '@/components/ui/button';
 
 export const Example = () => {
   return (
     <div>
+      <Navbar />
       <p>Example</p>
       <Button>Ceci est un button shadcn</Button>
       <div className="flex">
