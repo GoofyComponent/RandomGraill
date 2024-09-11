@@ -5,7 +5,7 @@ import Navbar from '@/components/ui/navbar';
 export const Example = () => {
   return (
     <div>
-      <Navbar></Navbar>
+      <Navbar />
       <p>Example</p>
       <Button>Ceci est un button shadcn</Button>
       <div className="flex">
