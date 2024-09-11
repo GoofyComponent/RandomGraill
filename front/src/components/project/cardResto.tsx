@@ -67,12 +67,12 @@ const CardResto: React.FC<CardRestoProps> = ({
   return clickable ? (
     <Link
       to={url}
-      className={`block w-1/2 ${variant === 'carousel' ? 'max-w-40' : 'max-w-52'}`}
+      className={`block w-full ${variant === 'carousel' ? 'max-w-40' : 'max-w-52'}`}
     >
       {cardContent}
     </Link>
   ) : (
-    <div className={`block w-1/2 ${variant === 'carousel' ? 'max-w-40' : 'max-w-52'}`}>
+    <div className={`block w-full ${variant === 'carousel' ? 'max-w-40' : 'max-w-52'}`}>
       {cardContent}
     </div>
   );
