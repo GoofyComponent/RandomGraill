@@ -11,25 +11,22 @@ const app = initializeApp(FIREBASE_CONFIG);
 export const analytics = getAnalytics(app); //How to register events: logEvent(analytics, 'the_event');
 export const db = getFirestore(app, DB_NAME ?? '(default)');
 
-const auth = getAuth(app);
+export const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-const signInWithGoogle = async () => {
+export const signInWithGoogle = async () => {
   try {
     const result = await signInWithPopup(auth, provider);
     return result.user;
   } catch (error) {
-    console.error(error);
-    return null;
+    throw new Error(`Erreur lors de la connexion avec Google: ${error}`);
   }
 };
 
-const logOut = async () => {
+export const logOut = async () => {
   try {
     await signOut(auth);
   } catch (error) {
-    console.error('Erreur lors de la déconnexion', error);
+    throw new Error(`Erreur lors de la déconnexion: ${error}`);
   }
 };
-
-export { auth, logOut, signInWithGoogle };

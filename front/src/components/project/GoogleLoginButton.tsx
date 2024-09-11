@@ -1,14 +1,16 @@
 import { useMutation } from '@tanstack/react-query';
 
+import GoogleIcon from '@/assets/images/google.svg';
 import { Button } from '@/components/ui/button.tsx';
 import { Loader } from '@/components/ui/loader.tsx';
 import { signInWithGoogle } from '@/lib/firebase.ts';
 
-import GoogleIcon from '../../public/icons/google.svg'; // Ajoute un fichier SVG de Google dans ton dossier public/icons
-
 export const GoogleLoginButton = () => {
   const mutation = useMutation({
     mutationFn: async () => signInWithGoogle(),
+    onError: (error) => {
+      console.error('Error while logging in with Google', error);
+    },
   });
 
   return (

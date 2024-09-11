@@ -15,7 +15,7 @@ export const LogoutButton = ({ buttonProps }: LogoutButtonProps) => {
   });
 
   return (
-    <Button variant={'destructive'} {...buttonProps} onClick={() => mutation.mutate()}>
+    <Button variant="destructive" {...buttonProps} onClick={() => mutation.mutate()}>
       Logout
     </Button>
   );

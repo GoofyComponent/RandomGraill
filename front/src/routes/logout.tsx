@@ -1,3 +1,5 @@
+//TODO: A DELETE AFTER
+
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useEffect } from 'react';
 
