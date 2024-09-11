@@ -10,7 +10,7 @@ RandomGraill est une application qui vous permet de rechercher des restaurants a
 
 ## Installation
 
-<!-- 1. Créez un fichier `firebaseCredentials.ts` a la racine du projet et ajoutez-y la configuration du projet Firebase. -->
+1. Créez un fichier `firebaseCredentials.ts` a la racine du projet et ajoutez-y la configuration du projet Firebase. Le contenu est sur discord. 
 
 ```typescript
 export const firebaseConfig = {
