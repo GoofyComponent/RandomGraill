@@ -111,7 +111,7 @@ const CardResto: React.FC<CardRestoProps> = ({
         <div className="align-item">
           {type === undefined ? <p>No information</p> : <p>{type}</p>}
           {note === undefined ? <p>No rating</p> : <Stars note={note} />}
-          <img src={bgImage} />
+          <img src={bgImage ? bgImage : defaultImage} />
           {priceRange === undefined ? (
             <p>No price range</p>
           ) : (
