@@ -1,14 +1,32 @@
 import { Link } from '@tanstack/react-router';
+import { MapPin } from 'lucide-react';
 import React from 'react';
+import { useState } from 'react';
 
 import { Card, CardContent } from '@/components/ui/card';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+
+import { Button } from '../ui/button';
+import { Stars } from '../ui/stars';
 
 interface CardRestoProps {
   id: number;
   bgImage: string | null;
   name: string;
   distance: string;
-  url: string;
+  type: string;
+  note: number;
+  priceRange: string;
+  desc: string;
+  mapLink: string;
   headerBgColor?: string;
   footerBgColor?: string;
   variant?: 'default' | 'carousel' | 'disabled' | 'selected';
@@ -20,7 +38,11 @@ const CardResto: React.FC<CardRestoProps> = ({
   bgImage,
   name,
   distance,
-  url,
+  type,
+  note,
+  priceRange,
+  desc,
+  mapLink,
   headerBgColor = 'bg-secondary',
   footerBgColor = 'bg-accent',
   variant = 'default',
@@ -28,8 +50,19 @@ const CardResto: React.FC<CardRestoProps> = ({
   onClick,
 }) => {
   const defaultImage = '/src/assets/images/bg-card-resto.png';
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const openDialog = () => {
+    setIsDialogOpen(true);
+  };
+
+  const closeDialog = () => {
+    setIsDialogOpen(!isDialogOpen);
+  };
+
   const cardContent = (
     <Card
+      onClick={clickable ? openDialog : undefined}
       className={`group relative ${variant === 'carousel' ? 'h-20' : 'h-24'} w-full overflow-hidden transition-shadow hover:shadow-lg`}
     >
       {variant === 'selected' && (
@@ -58,29 +91,61 @@ const CardResto: React.FC<CardRestoProps> = ({
         >
           <p className="text-xxs md:text-xs">{distance}</p>
         </div>
-        {!clickable && (
-          <Link to={url} className="absolute right-2 top-2 text-white">
-            <div className="flex h-6 w-6 items-center justify-center rounded-full bg-black bg-opacity-50">
-              <span className="text-xs">•••</span>
-            </div>
-          </Link>
-        )}
       </CardContent>
+      {!clickable && (
+        <div className="absolute right-2 top-2 z-20 text-white" onClick={openDialog}>
+          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-black bg-opacity-50">
+            <span className="text-xs">•••</span>
+          </div>
+        </div>
+      )}
     </Card>
   );
+
+  const dialogCard = (
+    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{name}</DialogTitle>
+        </DialogHeader>
+        <div>
+          <p>{type}</p>
+          <Stars className={name} note={note} />
+          <img src={bgImage} />
+          <p>Prix moyen : {priceRange}</p>
+        </div>
+        <DialogDescription>{desc}</DialogDescription>
+        <DialogFooter className="sm:justify-center">
+          <Link to={mapLink} target="_blank">
+            <Button type="button">
+              Maps <MapPin className="mr-2 h-5 w-6" />
+            </Button>
+          </Link>
+          <DialogClose asChild>
+            <Button onClick={closeDialog} type="button">
+              Fermer
+            </Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+
   return clickable ? (
-    <Link
-      to={url}
+    <div
+      onClick={onClick}
       className={`block w-full pb-2 ${variant === 'carousel' ? 'max-w-40' : 'max-w-52'}`}
     >
       {cardContent}
-    </Link>
+      {dialogCard}
+    </div>
   ) : (
     <div
       onClick={onClick}
       className={`block w-full pb-2 ${variant === 'carousel' ? 'max-w-40' : 'max-w-52'}`}
     >
       {cardContent}
+      {dialogCard}
     </div>
   );
 };
