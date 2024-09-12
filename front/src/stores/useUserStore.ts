@@ -33,8 +33,6 @@ const useUserStore = create<UserState>()(
           isAuthenticated: false,
         }),
       updatePreferences: (newPreferences: UserPreferences) => {
-        console.log('update preferences');
-        console.log(newPreferences);
         set((state) => ({
           userPreferences: {
             ...state.userPreferences,

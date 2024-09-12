@@ -40,24 +40,22 @@ export const UserPage = () => {
   }, [rangeArea]);
 
   return (
-    <div className="flex flex-col">
-      <nav>
-        <div className="mx-auto flex w-full items-center justify-between px-1 py-1">
-          <ArrowLeft
-            onClick={() => history.go(-1)}
-            className="text-primary"
-            size={32}
-            strokeWidth={2}
-          />
-          <img src={logo} alt="Logo" className="h-12 w-12" />
-        </div>
+    <div className="flexflex-col">
+      <nav className="mx-auto flex h-16 w-full items-center justify-between px-1 py-1">
+        <ArrowLeft
+          onClick={() => history.go(-1)}
+          className="text-primary"
+          size={32}
+          strokeWidth={2}
+        />
+        <img src={logo} alt="Logo" className="h-12 w-12" />
       </nav>
-      <section className="flex h-screen flex-col items-center justify-center space-y-8">
+      <section className="mx-auto flex min-h-[calc(100vh-64px)] w-11/12 flex-col items-center justify-center space-y-8">
         <Avatar className="mx-auto h-24 w-24">
           <AvatarImage src={userData.photoURL} />
           <AvatarFallback>{userData.displayName.slice(0, 3)}</AvatarFallback>
         </Avatar>
-        <h1 className="text-4xl font-bold">Hello, {userData.displayName}</h1>
+        <h1 className="text-3xl font-bold">Hello, {userData.displayName}</h1>
         <div className="my-8 w-full">
           <p className="text-xl font-semibold">Your current range area:</p>
           <p className="text-right text-2xl font-semibold">{rangeArea[0]} meters</p>
@@ -65,7 +63,6 @@ export const UserPage = () => {
             value={rangeArea}
             onValueChange={(value) => {
               setRangeArea(value);
-              console.log(rangeArea);
             }}
             min={150}
             max={1000}
