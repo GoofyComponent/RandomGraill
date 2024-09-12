@@ -15,7 +15,7 @@ import { Route as TestImport } from './routes/test'
 import { Route as LoginImport } from './routes/login'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as AuthWheelsImport } from './routes/_auth/wheels'
-import { Route as AuthDashboardImport } from './routes/_auth/dashboard'
+import { Route as AuthHomepageImport } from './routes/_auth/homepage'
 import { Route as AuthAccountImport } from './routes/_auth/account'
 import { Route as AuthWheelsIndexImport } from './routes/_auth/wheels/index'
 
@@ -41,8 +41,8 @@ const AuthWheelsRoute = AuthWheelsImport.update({
   getParentRoute: () => AuthRoute,
 } as any)
 
-const AuthDashboardRoute = AuthDashboardImport.update({
-  path: '/dashboard',
+const AuthHomepageRoute = AuthHomepageImport.update({
+  path: '/homepage',
   getParentRoute: () => AuthRoute,
 } as any)
 
@@ -88,11 +88,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthAccountImport
       parentRoute: typeof AuthImport
     }
-    '/_auth/dashboard': {
-      id: '/_auth/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthDashboardImport
+    '/_auth/homepage': {
+      id: '/_auth/homepage'
+      path: '/homepage'
+      fullPath: '/homepage'
+      preLoaderRoute: typeof AuthHomepageImport
       parentRoute: typeof AuthImport
     }
     '/_auth/wheels': {
@@ -117,7 +117,7 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren({
   AuthRoute: AuthRoute.addChildren({
     AuthAccountRoute,
-    AuthDashboardRoute,
+    AuthHomepageRoute,
     AuthWheelsRoute: AuthWheelsRoute.addChildren({ AuthWheelsIndexRoute }),
   }),
   LoginRoute,
@@ -141,7 +141,7 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "_auth.tsx",
       "children": [
         "/_auth/account",
-        "/_auth/dashboard",
+        "/_auth/homepage",
         "/_auth/wheels"
       ]
     },
@@ -155,8 +155,8 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "_auth/account.tsx",
       "parent": "/_auth"
     },
-    "/_auth/dashboard": {
-      "filePath": "_auth/dashboard.tsx",
+    "/_auth/homepage": {
+      "filePath": "_auth/homepage.tsx",
       "parent": "/_auth"
     },
     "/_auth/wheels": {
