@@ -2,21 +2,29 @@ import { User } from 'firebase/auth';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-interface AuthState {
+import { UserPreferences } from '@/types/user';
+
+interface UserState {
   user: User | null | undefined;
+  userPreferences: UserPreferences | null;
   isAuthenticated: boolean;
   login: (userData: User) => void;
   logout: () => void;
+  updatePreferences: (newPreferences: UserPreferences) => void;
 }
 
-const useAuthStore = create<AuthState>()(
+const useUserStore = create<UserState>()(
   persist(
     (set) => ({
       user: null, // Par défaut, l'utilisateur est non connecté
+      userPreferences: null,
       isAuthenticated: false,
       login: (userData: User) =>
         set({
           user: userData,
+          userPreferences: {
+            rangeArea: 500,
+          },
           isAuthenticated: true,
         }),
       logout: () =>
@@ -24,11 +32,19 @@ const useAuthStore = create<AuthState>()(
           user: null,
           isAuthenticated: false,
         }),
+      updatePreferences: (newPreferences: UserPreferences) => {
+        set((state) => ({
+          userPreferences: {
+            ...state.userPreferences,
+            ...newPreferences,
+          },
+        }));
+      },
     }),
     {
-      name: 'authStore',
+      name: 'userStore',
     },
   ),
 );
 
-export default useAuthStore;
+export default useUserStore;

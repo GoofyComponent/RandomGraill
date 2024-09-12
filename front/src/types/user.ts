@@ -7,4 +7,8 @@ interface UserState {
   error: string | null;
 }
 
-export type { UserState };
+interface UserPreferences {
+  rangeArea: number;
+}
+
+export type { UserPreferences, UserState };

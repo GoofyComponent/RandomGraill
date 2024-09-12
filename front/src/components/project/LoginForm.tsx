@@ -4,11 +4,11 @@ import { useEffect } from 'react';
 
 import { GoogleLoginButton } from '@/components/project/GoogleLoginButton';
 import { createOrGetUser } from '@/lib/firestore.ts';
-import useAuthStore from '@/stores/useUserStore.ts';
+import useUserStore from '@/stores/useUserStore.ts';
 
 const LoginForm = () => {
   const auth = getAuth();
-  const { login } = useAuthStore();
+  const { login } = useUserStore();
 
   const navigate = useNavigate();
   useEffect(() => {

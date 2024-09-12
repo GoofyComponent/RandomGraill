@@ -11,19 +11,14 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as LogoutImport } from './routes/logout'
 import { Route as LoginImport } from './routes/login'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as AuthWheelsImport } from './routes/_auth/wheels'
 import { Route as AuthDashboardImport } from './routes/_auth/dashboard'
+import { Route as AuthAccountImport } from './routes/_auth/account'
 import { Route as AuthWheelsIndexImport } from './routes/_auth/wheels/index'
 
 // Create/Update Routes
-
-const LogoutRoute = LogoutImport.update({
-  path: '/logout',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const LoginRoute = LoginImport.update({
   path: '/login',
@@ -42,6 +37,11 @@ const AuthWheelsRoute = AuthWheelsImport.update({
 
 const AuthDashboardRoute = AuthDashboardImport.update({
   path: '/dashboard',
+  getParentRoute: () => AuthRoute,
+} as any)
+
+const AuthAccountRoute = AuthAccountImport.update({
+  path: '/account',
   getParentRoute: () => AuthRoute,
 } as any)
 
@@ -68,12 +68,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
-    '/logout': {
-      id: '/logout'
-      path: '/logout'
-      fullPath: '/logout'
-      preLoaderRoute: typeof LogoutImport
-      parentRoute: typeof rootRoute
+    '/_auth/account': {
+      id: '/_auth/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AuthAccountImport
+      parentRoute: typeof AuthImport
     }
     '/_auth/dashboard': {
       id: '/_auth/dashboard'
@@ -103,11 +103,11 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   AuthRoute: AuthRoute.addChildren({
+    AuthAccountRoute,
     AuthDashboardRoute,
     AuthWheelsRoute: AuthWheelsRoute.addChildren({ AuthWheelsIndexRoute }),
   }),
   LoginRoute,
-  LogoutRoute,
 })
 
 /* prettier-ignore-end */
@@ -119,13 +119,13 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/_auth",
-        "/login",
-        "/logout"
+        "/login"
       ]
     },
     "/_auth": {
       "filePath": "_auth.tsx",
       "children": [
+        "/_auth/account",
         "/_auth/dashboard",
         "/_auth/wheels"
       ]
@@ -133,8 +133,9 @@ export const routeTree = rootRoute.addChildren({
     "/login": {
       "filePath": "login.tsx"
     },
-    "/logout": {
-      "filePath": "logout.tsx"
+    "/_auth/account": {
+      "filePath": "_auth/account.tsx",
+      "parent": "/_auth"
     },
     "/_auth/dashboard": {
       "filePath": "_auth/dashboard.tsx",
