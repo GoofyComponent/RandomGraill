@@ -3,6 +3,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useEffect } from 'react';
 
 import { GoogleLoginButton } from '@/components/project/GoogleLoginButton';
+import { createOrGetUser } from '@/lib/firestore.ts';
 import useAuthStore from '@/stores/useUserStore.ts';
 
 const LoginForm = () => {
@@ -11,10 +12,11 @@ const LoginForm = () => {
 
   const navigate = useNavigate();
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         login(user);
-        navigate({
+        await createOrGetUser(user);
+        await navigate({
           to: '/dashboard',
         });
       }
