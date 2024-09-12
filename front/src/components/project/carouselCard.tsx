@@ -16,9 +16,22 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ items, type }) => {
       opts={{
         align: 'start',
       }}
-      className="w-full max-w-sm"
+      className="w-full"
     >
       <CarouselContent>
+        {type === 'cardRoulette' && (
+          <div className="carousel-card">
+            <CarouselItem className="min-w-40">
+              <CardRoulette
+                name="Add"
+                url="#"
+                variant="carousel"
+                usage="add"
+                clickable={true}
+              />
+            </CarouselItem>
+          </div>
+        )}
         {items.map((item) => (
           <div key={item.id} className="carousel-card">
             {type === 'cardRoulette' ? (
