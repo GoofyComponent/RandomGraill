@@ -132,7 +132,7 @@ export const Wheel: React.FC<WheelProps> = ({
       ctx.rotate(startAngle + anglePerItem / 2);
       ctx.textAlign = 'center'; // Centre le texte par rapport au point de départ
       ctx.fillStyle = textColor;
-      ctx.font = `${16 * resolutionMultiplier}px Arial`;
+      ctx.font = `${16 * resolutionMultiplier}px Poppins`;
 
       ctx.strokeStyle = 'black';
       ctx.lineWidth = 3;
