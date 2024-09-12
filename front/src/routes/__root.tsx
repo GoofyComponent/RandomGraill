@@ -10,8 +10,13 @@ export const Route = createRootRoute({
         to: '/login',
       });
     }
+    if (auth.currentUser && location.pathname === '/login') {
+      throw redirect({
+        to: '/dashboard',
+      });
+    }
 
-    if (location.pathname === '/' || location.pathname === '/login') {
+    if (location.pathname === '/') {
       throw redirect({
         to: '/dashboard',
       });
