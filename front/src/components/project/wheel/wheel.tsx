@@ -15,6 +15,8 @@ interface WheelProps {
   buttonLabel?: string;
   autoSpin?: boolean;
   hideButton?: boolean;
+  buttonSize?: string;
+  buttonTextSize?: string;
   onResult?: (result: string) => void;
 }
 
@@ -36,6 +38,9 @@ interface WheelProps {
  *
  * @param autoSpin Permet de lancer automatiquement la roue si true (optionnelle, par défaut false).
  * @param hideButton Cache le bouton si true (optionnelle, par défaut false).
+ *
+ * @param buttonSize Taille du bouton (optionnelle, par défaut '50px').
+ * @param buttonTextSize Taille du texte dans le bouton (optionnelle, par défaut '16px').
  *
  * @param onResult Fonction appelée une fois que la roue s'arrête avec le résultat sélectionné (optionnelle).
  *
@@ -65,6 +70,8 @@ export const Wheel: React.FC<WheelProps> = ({
   buttonLabel = 'Spin',
   autoSpin = false,
   hideButton = false,
+  buttonSize = '50px',
+  buttonTextSize = '16px',
   onResult,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -91,6 +98,25 @@ export const Wheel: React.FC<WheelProps> = ({
     return realSize;
   };
 
+  // Fonction pour tronquer le texte s'il est trop long
+  const truncateText = (
+    ctx: CanvasRenderingContext2D,
+    text: string,
+    maxWidth: number,
+  ): string => {
+    let truncatedText = text;
+    if (ctx.measureText(text).width > maxWidth) {
+      while (
+        ctx.measureText(truncatedText + '...').width > maxWidth &&
+        truncatedText.length > 0
+      ) {
+        truncatedText = truncatedText.slice(0, -1); // Supprime un caractère à la fois
+      }
+      truncatedText += '...'; // Ajoute "..." à la fin du texte tronqué
+    }
+    return truncatedText;
+  };
+
   const drawText = useCallback(
     (
       ctx: CanvasRenderingContext2D,
@@ -98,17 +124,20 @@ export const Wheel: React.FC<WheelProps> = ({
       startAngle: number,
       item: string,
     ): void => {
+      const maxTextWidth = radius - 320; // Ajuste la largeur maximale du texte
+      const truncatedItem = truncateText(ctx, item, maxTextWidth); // Tronque le texte si nécessaire
+
       ctx.save();
       ctx.translate(radius, radius);
       ctx.rotate(startAngle + anglePerItem / 2);
-      ctx.textAlign = 'right';
+      ctx.textAlign = 'center'; // Centre le texte par rapport au point de départ
       ctx.fillStyle = textColor;
       ctx.font = `${16 * resolutionMultiplier}px Arial`;
 
       ctx.strokeStyle = 'black';
       ctx.lineWidth = 3;
-      ctx.strokeText(item, radius - 20, 10);
-      ctx.fillText(item, radius - 20, 10);
+      ctx.strokeText(truncatedItem, radius / 2, 10); // Rapproche le texte du centre
+      ctx.fillText(truncatedItem, radius / 2, 10); // Rapproche le texte du centre
       ctx.restore();
     },
     [anglePerItem, textColor, resolutionMultiplier],
@@ -242,6 +271,9 @@ export const Wheel: React.FC<WheelProps> = ({
             borderColor: buttonBorderColor,
             borderWidth: '2px',
             borderStyle: 'solid',
+            width: buttonSize,
+            height: buttonSize,
+            fontSize: buttonTextSize,
           }}
           disabled={isSpinning}
         >

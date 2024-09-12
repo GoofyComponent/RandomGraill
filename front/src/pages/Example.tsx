@@ -193,7 +193,7 @@ export const Example = () => {
 
       <div className="m-auto h-[400px] w-[400px] border border-black">
         <Wheel
-          items={['Item 1', 'Item 2', 'Item 3']}
+          items={['Iteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeem 1', 'Item 2', 'Item 3']}
           colors={['#ff0000', '#00ff00', '#0000ff']}
           buttonColor="#ff7700"
           buttonTextColor="#ff00a2"
