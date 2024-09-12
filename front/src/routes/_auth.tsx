@@ -1,5 +1,6 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 
+import Navbar from '@/components/project/navbar.tsx';
 import { auth } from '@/lib/firebase';
 
 export const Route = createFileRoute('/_auth')({
@@ -14,7 +15,8 @@ export const Route = createFileRoute('/_auth')({
 
 const AuthLayout = () => {
   return (
-    <div className="flex h-screen w-screen items-center justify-center bg-gray-50">
+    <div className="width-full h-full">
+      <Navbar />
       <Outlet />
     </div>
   );
