@@ -1,6 +1,6 @@
 import CardResto from '@/components/project/cardResto';
 import CarouselCard from '@/components/project/carouselCard';
-import { Button } from '@/components/ui/button';
+import Navbar from '@/components/project/navbar';
 
 export const Example = () => {
   const itemResto = [
@@ -42,9 +42,8 @@ export const Example = () => {
   ];
 
   return (
-    <div>
+    <div className="h-full w-full px-4">
       <Navbar />
-    <div className="h-full w-full p-4">
       <p>Example</p>
       <CardResto
         bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
