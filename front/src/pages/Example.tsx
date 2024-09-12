@@ -11,7 +11,7 @@ export const Example = () => {
     {
       id: 1,
       title: 'Le Petit Bistro',
-      url: '/restaurant/le-petit-bistro',
+      url: '/wheels/1',
       imageUrl: 'https://example.com/petit-bistro.jpg',
       distance: '200m',
     },
