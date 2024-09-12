@@ -13,6 +13,7 @@ interface CardRestoProps {
   footerBgColor?: string;
   variant?: 'default' | 'carousel' | 'disabled' | 'selected';
   clickable?: boolean;
+  onClick?: () => void;
 }
 
 const CardResto: React.FC<CardRestoProps> = ({
@@ -24,6 +25,7 @@ const CardResto: React.FC<CardRestoProps> = ({
   footerBgColor = 'bg-accent',
   variant = 'default',
   clickable = true,
+  onClick,
 }) => {
   const cardContent = (
     <Card
@@ -74,6 +76,7 @@ const CardResto: React.FC<CardRestoProps> = ({
     </Link>
   ) : (
     <div
+      onClick={onClick}
       className={`block w-full pb-2 ${variant === 'carousel' ? 'max-w-40' : 'max-w-52'}`}
     >
       {cardContent}

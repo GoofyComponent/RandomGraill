@@ -19,6 +19,7 @@ import { Route as AuthHomepageImport } from './routes/_auth/homepage'
 import { Route as AuthAccountImport } from './routes/_auth/account'
 import { Route as AuthWheelsIndexImport } from './routes/_auth/wheels/index'
 import { Route as AuthWheelsWheelIdImport } from './routes/_auth/wheels/$wheelId'
+import { Route as AuthWheelsWheelIdEditImport } from './routes/_auth/wheels/$wheelId.edit'
 
 // Create/Update Routes
 
@@ -60,6 +61,11 @@ const AuthWheelsIndexRoute = AuthWheelsIndexImport.update({
 const AuthWheelsWheelIdRoute = AuthWheelsWheelIdImport.update({
   path: '/$wheelId',
   getParentRoute: () => AuthWheelsRoute,
+} as any)
+
+const AuthWheelsWheelIdEditRoute = AuthWheelsWheelIdEditImport.update({
+  path: '/edit',
+  getParentRoute: () => AuthWheelsWheelIdRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -122,6 +128,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthWheelsIndexImport
       parentRoute: typeof AuthWheelsImport
     }
+    '/_auth/wheels/$wheelId/edit': {
+      id: '/_auth/wheels/$wheelId/edit'
+      path: '/edit'
+      fullPath: '/wheels/$wheelId/edit'
+      preLoaderRoute: typeof AuthWheelsWheelIdEditImport
+      parentRoute: typeof AuthWheelsWheelIdImport
+    }
   }
 }
 
@@ -132,7 +145,9 @@ export const routeTree = rootRoute.addChildren({
     AuthAccountRoute,
     AuthHomepageRoute,
     AuthWheelsRoute: AuthWheelsRoute.addChildren({
-      AuthWheelsWheelIdRoute,
+      AuthWheelsWheelIdRoute: AuthWheelsWheelIdRoute.addChildren({
+        AuthWheelsWheelIdEditRoute,
+      }),
       AuthWheelsIndexRoute,
     }),
   }),
@@ -185,11 +200,18 @@ export const routeTree = rootRoute.addChildren({
     },
     "/_auth/wheels/$wheelId": {
       "filePath": "_auth/wheels/$wheelId.tsx",
-      "parent": "/_auth/wheels"
+      "parent": "/_auth/wheels",
+      "children": [
+        "/_auth/wheels/$wheelId/edit"
+      ]
     },
     "/_auth/wheels/": {
       "filePath": "_auth/wheels/index.tsx",
       "parent": "/_auth/wheels"
+    },
+    "/_auth/wheels/$wheelId/edit": {
+      "filePath": "_auth/wheels/$wheelId.edit.tsx",
+      "parent": "/_auth/wheels/$wheelId"
     }
   }
 }

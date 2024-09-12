@@ -7,26 +7,29 @@ interface User {
 }
 
 interface UserWheel {
-  list: Schema['wheel']['Id'][];
+  list: Schema['wheels']['Id'][];
+  isFavorite: boolean;
 }
 
 interface Restaurant {
+  id: number;
   name: string;
   address: string;
   image: string;
+  active: boolean;
+  distance: string;
 }
 
 interface Wheel {
   name: string;
+  restaurants: Restaurant[];
 }
 
 export const db = schema(($) => ({
   user: $.collection<User>().sub({
     wheels: $.collection<UserWheel>(),
   }),
-  wheel: $.collection<Wheel>().sub({
-    restaurants: $.collection<Restaurant>(),
-  }),
+  wheels: $.collection<Wheel>(),
 }));
 
 export type Schema = Typesaurus.Schema<typeof db>;
