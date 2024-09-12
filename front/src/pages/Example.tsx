@@ -104,6 +104,66 @@ export const Example = () => {
             clickable={true}
           />
         </div>
+        <div className="w-1/2 sm:w-1/5">
+          <CardResto
+            bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
+            name="Mcdo"
+            distance="500m"
+            url="/restaurant/le-petit-bistro"
+            variant="default"
+            clickable={true}
+          />
+        </div>
+        <div className="w-1/2 sm:w-1/5">
+          <CardResto
+            bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
+            name="Mcdo"
+            distance="500m"
+            url="/restaurant/le-petit-bistro"
+            variant="default"
+            clickable={true}
+          />
+        </div>
+        <div className="w-1/2 sm:w-1/5">
+          <CardResto
+            bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
+            name="Mcdo"
+            distance="500m"
+            url="/restaurant/le-petit-bistro"
+            variant="default"
+            clickable={true}
+          />
+        </div>
+        <div className="w-1/2 sm:w-1/5">
+          <CardResto
+            bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
+            name="Mcdo"
+            distance="500m"
+            url="/restaurant/le-petit-bistro"
+            variant="default"
+            clickable={true}
+          />
+        </div>
+        <div className="w-1/2 sm:w-1/5">
+          <CardResto
+            bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
+            name="Mcdo"
+            distance="500m"
+            url="/restaurant/le-petit-bistro"
+            variant="default"
+            clickable={true}
+          />
+        </div>
+        <div className="w-1/2 sm:w-1/5">
+          <CardResto
+            bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
+            name="Mcdo"
+            distance="500m"
+            url="/restaurant/le-petit-bistro"
+            variant="default"
+            clickable={true}
+          />
+        </div>
       </div>
       <CarouselCard items={itemResto} type="cardRoulette" />
     </div>
