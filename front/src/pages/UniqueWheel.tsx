@@ -50,9 +50,6 @@ export const UniqueWheelPage = () => {
     bgImage: string;
   } | null>(null);
   const handleResult = (result: string) => {
-    console.log('spinEnd');
-    console.log(result);
-    console.log(showResult);
     const selectedItem = itemResto.find((item) => item.name === result);
     if (selectedItem) {
       setWheelResult({
@@ -89,6 +86,7 @@ export const UniqueWheelPage = () => {
           {itemResto.map((item, index) => (
             <div key={index} className="mb-2 w-1/2 px-1 sm:w-1/3 md:w-1/4 lg:w-1/5">
               <CardResto
+                id={index}
                 bgImage={item.img}
                 name={item.name}
                 distance={item.distance}

@@ -18,6 +18,7 @@ import { Route as AuthWheelsImport } from './routes/_auth/wheels'
 import { Route as AuthHomepageImport } from './routes/_auth/homepage'
 import { Route as AuthAccountImport } from './routes/_auth/account'
 import { Route as AuthWheelsIndexImport } from './routes/_auth/wheels/index'
+import { Route as AuthWheelsWheelIdImport } from './routes/_auth/wheels/$wheelId'
 
 // Create/Update Routes
 
@@ -53,6 +54,11 @@ const AuthAccountRoute = AuthAccountImport.update({
 
 const AuthWheelsIndexRoute = AuthWheelsIndexImport.update({
   path: '/',
+  getParentRoute: () => AuthWheelsRoute,
+} as any)
+
+const AuthWheelsWheelIdRoute = AuthWheelsWheelIdImport.update({
+  path: '/$wheelId',
   getParentRoute: () => AuthWheelsRoute,
 } as any)
 
@@ -102,6 +108,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthWheelsImport
       parentRoute: typeof AuthImport
     }
+    '/_auth/wheels/$wheelId': {
+      id: '/_auth/wheels/$wheelId'
+      path: '/$wheelId'
+      fullPath: '/wheels/$wheelId'
+      preLoaderRoute: typeof AuthWheelsWheelIdImport
+      parentRoute: typeof AuthWheelsImport
+    }
     '/_auth/wheels/': {
       id: '/_auth/wheels/'
       path: '/'
@@ -118,7 +131,10 @@ export const routeTree = rootRoute.addChildren({
   AuthRoute: AuthRoute.addChildren({
     AuthAccountRoute,
     AuthHomepageRoute,
-    AuthWheelsRoute: AuthWheelsRoute.addChildren({ AuthWheelsIndexRoute }),
+    AuthWheelsRoute: AuthWheelsRoute.addChildren({
+      AuthWheelsWheelIdRoute,
+      AuthWheelsIndexRoute,
+    }),
   }),
   LoginRoute,
   TestRoute,
@@ -163,8 +179,13 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "_auth/wheels.tsx",
       "parent": "/_auth",
       "children": [
+        "/_auth/wheels/$wheelId",
         "/_auth/wheels/"
       ]
+    },
+    "/_auth/wheels/$wheelId": {
+      "filePath": "_auth/wheels/$wheelId.tsx",
+      "parent": "/_auth/wheels"
     },
     "/_auth/wheels/": {
       "filePath": "_auth/wheels/index.tsx",
