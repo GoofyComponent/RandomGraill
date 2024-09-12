@@ -18,6 +18,7 @@ import { Route as AuthWheelsImport } from './routes/_auth/wheels'
 import { Route as AuthHomepageImport } from './routes/_auth/homepage'
 import { Route as AuthAccountImport } from './routes/_auth/account'
 import { Route as AuthWheelsIndexImport } from './routes/_auth/wheels/index'
+import { Route as AuthWheelsNewImport } from './routes/_auth/wheels/new'
 import { Route as AuthWheelsWheelIdImport } from './routes/_auth/wheels/$wheelId'
 import { Route as AuthWheelsWheelIdEditImport } from './routes/_auth/wheels/$wheelId.edit'
 
@@ -55,6 +56,11 @@ const AuthAccountRoute = AuthAccountImport.update({
 
 const AuthWheelsIndexRoute = AuthWheelsIndexImport.update({
   path: '/',
+  getParentRoute: () => AuthWheelsRoute,
+} as any)
+
+const AuthWheelsNewRoute = AuthWheelsNewImport.update({
+  path: '/new',
   getParentRoute: () => AuthWheelsRoute,
 } as any)
 
@@ -121,6 +127,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthWheelsWheelIdImport
       parentRoute: typeof AuthWheelsImport
     }
+    '/_auth/wheels/new': {
+      id: '/_auth/wheels/new'
+      path: '/new'
+      fullPath: '/wheels/new'
+      preLoaderRoute: typeof AuthWheelsNewImport
+      parentRoute: typeof AuthWheelsImport
+    }
     '/_auth/wheels/': {
       id: '/_auth/wheels/'
       path: '/'
@@ -148,6 +161,7 @@ export const routeTree = rootRoute.addChildren({
       AuthWheelsWheelIdRoute: AuthWheelsWheelIdRoute.addChildren({
         AuthWheelsWheelIdEditRoute,
       }),
+      AuthWheelsNewRoute,
       AuthWheelsIndexRoute,
     }),
   }),
@@ -195,6 +209,7 @@ export const routeTree = rootRoute.addChildren({
       "parent": "/_auth",
       "children": [
         "/_auth/wheels/$wheelId",
+        "/_auth/wheels/new",
         "/_auth/wheels/"
       ]
     },
@@ -204,6 +219,10 @@ export const routeTree = rootRoute.addChildren({
       "children": [
         "/_auth/wheels/$wheelId/edit"
       ]
+    },
+    "/_auth/wheels/new": {
+      "filePath": "_auth/wheels/new.tsx",
+      "parent": "/_auth/wheels"
     },
     "/_auth/wheels/": {
       "filePath": "_auth/wheels/index.tsx",
