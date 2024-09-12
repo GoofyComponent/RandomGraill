@@ -215,6 +215,7 @@ export const Example = () => {
           onResult={(result) => handleResult(result)}
           autoSpin={autoSpin}
           wheelBorderColor="#ff00ff"
+          textStroke={false}
         />
         <Button onClick={triggerSpin}>External Spin</Button>
       </div>
