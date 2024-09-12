@@ -12,13 +12,13 @@ export const Route = createRootRoute({
     }
     if (auth.currentUser && location.pathname === '/login') {
       throw redirect({
-        to: '/dashboard',
+        to: '/homepage',
       });
     }
 
     if (location.pathname === '/') {
       throw redirect({
-        to: '/dashboard',
+        to: '/homepage',
       });
     }
   },
