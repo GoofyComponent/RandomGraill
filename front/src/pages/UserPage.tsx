@@ -40,7 +40,7 @@ export const UserPage = () => {
   }, [rangeArea]);
 
   return (
-    <div className="flexflex-col">
+    <div className="flex flex-col">
       <nav className="mx-auto flex h-16 w-full items-center justify-between px-1 py-1">
         <ArrowLeft
           onClick={() => history.go(-1)}
