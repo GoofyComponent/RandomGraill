@@ -1,8 +1,11 @@
 import { useLoaderData } from '@tanstack/react-router';
+import { useState } from 'react';
 
 import CardResto from '@/components/project/cardResto';
 import CarouselCard from '@/components/project/carouselCard';
 import Navbar from '@/components/project/navbar';
+import { Wheel } from '@/components/project/wheel/wheel';
+import { Button } from '@/components/ui/button';
 
 export const Example = () => {
   const { userData } = useLoaderData({
@@ -46,6 +49,19 @@ export const Example = () => {
       distance: '1km',
     },
   ];
+
+  const [autoSpin, setAutoSpin] = useState(false);
+
+  const handleResult = (result: string) => {
+    alert(`Selected item: ${result}`);
+  };
+
+  const triggerSpin = () => {
+    setAutoSpin(true);
+    setTimeout(() => {
+      setAutoSpin(false);
+    }, 100);
+  };
 
   return (
     <div className="h-full w-full px-4">
@@ -176,6 +192,22 @@ export const Example = () => {
         </div>
       </div>
       <CarouselCard items={itemResto} type="cardRoulette" />
+
+      <div className="m-auto h-[400px] w-[400px] border border-black">
+        <Wheel
+          items={['Item 1', 'Item 2', 'Item 3']}
+          colors={['#ff0000', '#00ff00', '#0000ff']}
+          buttonColor="#ff7700"
+          buttonTextColor="#ff00a2"
+          buttonBorderColor="#ff00ff"
+          needleColor="#8000ff"
+          buttonLabel="Go!"
+          onResult={(result) => handleResult(result)}
+          autoSpin={autoSpin}
+          wheelBorderColor="#ff00ff"
+        />
+        <Button onClick={triggerSpin}>External Spin</Button>
+      </div>
     </div>
   );
 };
