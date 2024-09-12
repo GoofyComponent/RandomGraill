@@ -53,11 +53,11 @@ export const WheelsPage = () => {
     <div className="h-full w-full">
       <div className="flex flex-wrap">
         <div className="w-1/2 sm:w-1/5">
-          <CardRoulette usage="add" name={'add'} url={'/wheels/add'} />
+          <CardRoulette usage="add" name={'add'} url={'/wheels/add'} id={0} />
         </div>
         {wheels.map((wheel) => (
           <div className="w-1/2 sm:w-1/5">
-            <CardRoulette name={wheel.name} url={`/wheels/${wheel.id}`} />
+            <CardRoulette name={wheel.name} url={`/wheels/${wheel.id}`} id={0} />
           </div>
         ))}
       </div>

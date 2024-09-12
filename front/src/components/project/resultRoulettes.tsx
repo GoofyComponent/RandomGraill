@@ -35,6 +35,7 @@ const ResultRoulette: React.FC<ResultRouletteProps> = ({ result, show, setShow }
       <h3 className="my-6 text-2xl">Nous mangeons chez</h3>
       <div className="flex w-full scale-125 justify-center">
         <CardResto
+          id={0}
           name={result.name}
           url={result.url}
           distance="100m"
