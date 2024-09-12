@@ -82,12 +82,14 @@ const CardRoulette: React.FC<CardRestoProps> = ({
   return clickable ? (
     <Link
       to={url}
-      className={`block w-full ${variant === 'carousel' ? 'max-w-40' : 'max-w-52'} `}
+      className={`block w-full pb-2 ${variant === 'carousel' ? 'max-w-40' : 'max-w-52'} `}
     >
       {cardContent}
     </Link>
   ) : (
-    <div className={`block w-full ${variant === 'carousel' ? 'max-w-40' : 'max-w-52'}`}>
+    <div
+      className={`block w-full pb-2 ${variant === 'carousel' ? 'max-w-40' : 'max-w-52'}`}
+    >
       {cardContent}
     </div>
   );
