@@ -72,6 +72,9 @@
   .cardroulette {
     background-image: url('../images/bgcardroulette.png');
   }
+  .no-scroll {
+    overflow: hidden;
+  }
 }
 
 /* :root {
