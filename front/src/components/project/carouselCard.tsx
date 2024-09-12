@@ -23,6 +23,7 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ items, type }) => {
           <div className="carousel-card">
             <CarouselItem className="min-w-40">
               <CardRoulette
+                id={0}
                 name="Add"
                 url="#"
                 variant="carousel"
@@ -37,6 +38,7 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ items, type }) => {
             {type === 'cardRoulette' ? (
               <CarouselItem className="min-w-40">
                 <CardRoulette
+                  id={item.id}
                   name={item.title}
                   url={item.url}
                   variant="carousel"
@@ -46,6 +48,7 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ items, type }) => {
             ) : (
               <CarouselItem className="min-w-40">
                 <CardResto
+                  id={item.id}
                   bgImage={item.imageUrl}
                   name={item.title}
                   distance="500m"

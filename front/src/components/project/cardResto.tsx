@@ -4,6 +4,7 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 
 interface CardRestoProps {
+  id: number;
   bgImage: string;
   name: string;
   distance: string;
