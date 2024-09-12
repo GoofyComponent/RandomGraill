@@ -76,6 +76,7 @@ export const Example = () => {
         variant="default"
         clickable={true}
       />
+      <button onClick={() => setShowResult(true)}>Afficher ResultRoulette</button>
       <div className="flex flex-wrap">
         <div className="w-1/2 sm:w-1/5">
           <CardResto
@@ -206,7 +207,6 @@ export const Example = () => {
         <Button onClick={triggerSpin}>External Spin</Button>
       </div>
       <ResultRoulette result={result} show={showResult} setShow={setShowResult} />
-      <button onClick={() => setShowResult(true)}>Afficher ResultRoulette</button>
     </div>
   );
 };
