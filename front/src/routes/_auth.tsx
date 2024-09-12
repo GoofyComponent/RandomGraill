@@ -14,7 +14,7 @@ export const Route = createFileRoute('/_auth')({
 
 const AuthLayout = () => {
   return (
-    <main className="h-full w-full bg-[#FEF4D7]">
+    <main className="h-full w-full bg-background">
       <Outlet />
     </main>
   );
