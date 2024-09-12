@@ -1,3 +1,5 @@
+import { Link } from '@tanstack/react-router';
+import { Ellipsis } from 'lucide-react';
 import { useState } from 'react';
 
 import CardResto from '@/components/project/cardResto';
@@ -66,6 +68,11 @@ export const UniqueWheelPage = () => {
       <div className="mb-4 flex flex-wrap justify-center">
         <p className="my-3 text-xl font-medium text-black">Favorite Wheel</p>
         <div className="h-5/6 w-5/6 sm:w-1/4">
+          <div className="absolute right-0 top-0 m-4">
+            <Link to="/">
+              <Ellipsis />
+            </Link>
+          </div>
           <Wheel
             items={["McDonald's Vincennes", 'La Banquette', 'Street Wok']}
             colors={['#FF7549', '#F6C14B', '#ff7700']}
