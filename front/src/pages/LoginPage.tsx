@@ -22,7 +22,7 @@ const LoginPage = () => {
         login(data);
         await createOrGetUser(data);
         return navigate({
-          to: '/dashboard',
+          to: '/homepage',
         });
       }
     },

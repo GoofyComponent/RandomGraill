@@ -16,7 +16,7 @@ const Navbar = ({
   const { history } = useRouter();
 
   const userFallback = userName.slice(0, 3);
-  const isHomePath = !!useMatch({ from: '/_auth/dashboard', shouldThrow: false });
+  const isHomePath = !!useMatch({ from: '/_auth/homepage', shouldThrow: false });
 
   return (
     <nav>
