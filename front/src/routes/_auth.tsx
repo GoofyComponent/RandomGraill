@@ -15,9 +15,8 @@ export const Route = createFileRoute('/_auth')({
 
 const AuthLayout = () => {
   return (
-    <div className="width-full h-full">
-      <Navbar />
+    <div className="width-full h-full bg-gray-50">
       <Outlet />
-    </div>
+    </main>
   );
 };

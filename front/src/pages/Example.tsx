@@ -1,8 +1,14 @@
+import { useLoaderData } from '@tanstack/react-router';
+
 import CardResto from '@/components/project/cardResto';
 import CarouselCard from '@/components/project/carouselCard';
 import Navbar from '@/components/project/navbar';
 
 export const Example = () => {
+  const { userData } = useLoaderData({
+    from: '/_auth',
+  });
+
   const itemResto = [
     {
       id: 1,
@@ -43,7 +49,11 @@ export const Example = () => {
 
   return (
     <div className="h-full w-full px-4">
-      <Navbar />
+      <Navbar
+        userName={userData.displayName}
+        clickAvatarDirection="/account"
+        userPhoto={userData.photoURL}
+      />
       <p>Example</p>
       <CardResto
         bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
