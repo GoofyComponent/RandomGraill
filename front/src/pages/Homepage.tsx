@@ -1,9 +1,10 @@
-import Navbar from '@/components/project/navbar';
-import React from 'react';
 import { useLoaderData } from '@tanstack/react-router';
-import { Wheel } from '@/components/project/wheel/wheel';
-import CarouselCard from '@/components/project/carouselCard';
 import { ChevronRight } from 'lucide-react';
+import React from 'react';
+
+import CarouselCard from '@/components/project/carouselCard';
+import Navbar from '@/components/project/navbar';
+import { Wheel } from '@/components/project/wheel/wheel';
 
 const Homepage: React.FC = () => {
   const { userData } = useLoaderData({
