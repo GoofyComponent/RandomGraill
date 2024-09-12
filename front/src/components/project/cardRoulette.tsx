@@ -3,7 +3,8 @@ import React from 'react';
 
 import { Card, CardContent } from '@/components/ui/card';
 
-interface CardRestoProps {
+interface CardRouletteProps {
+  id: number;
   name: string;
   url: string;
   headerBgColor?: string;
@@ -12,7 +13,7 @@ interface CardRestoProps {
   clickable?: boolean;
 }
 
-const CardRoulette: React.FC<CardRestoProps> = ({
+const CardRoulette: React.FC<CardRouletteProps> = ({
   name,
   url,
   usage = 'default',
