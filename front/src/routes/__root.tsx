@@ -11,7 +11,7 @@ export const Route = createRootRoute({
       });
     }
 
-    if (location.pathname === '/') {
+    if (location.pathname === '/' || location.pathname === '/login') {
       throw redirect({
         to: '/dashboard',
       });
