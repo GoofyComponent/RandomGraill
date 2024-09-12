@@ -109,6 +109,7 @@ const Homepage: React.FC = () => {
             buttonLabel="Spin"
             onResult={(result) => handleResult(result)}
             wheelBorderColor="#FEF4D7"
+            textStroke={false}
           />
         </div>
       </div>

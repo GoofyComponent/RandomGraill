@@ -18,6 +18,9 @@ interface WheelProps {
   buttonSize?: string;
   buttonTextSize?: string;
   onResult?: (result: string) => void;
+  textStroke?: boolean; // Nouveau booléen pour activer/désactiver le stroke
+  textStrokeColor?: string; // Couleur du stroke
+  textStrokeWidth?: number; // Taille du stroke
 }
 
 /**
@@ -41,6 +44,10 @@ interface WheelProps {
  *
  * @param buttonSize Taille du bouton (optionnelle, par défaut '50px').
  * @param buttonTextSize Taille du texte dans le bouton (optionnelle, par défaut '16px').
+ *
+ * @param textStroke Active ou désactive le stroke du texte (optionnelle, par défaut true).
+ * @param textStrokeColor Couleur du stroke du texte (optionnelle, par défaut 'black').
+ * @param textStrokeWidth Taille du stroke du texte (optionnelle, par défaut 3).
  *
  * @param onResult Fonction appelée une fois que la roue s'arrête avec le résultat sélectionné (optionnelle).
  *
@@ -72,6 +79,9 @@ export const Wheel: React.FC<WheelProps> = ({
   hideButton = false,
   buttonSize = '50px',
   buttonTextSize = '16px',
+  textStroke = true,
+  textStrokeColor = 'black',
+  textStrokeWidth = 3,
   onResult,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -98,20 +108,21 @@ export const Wheel: React.FC<WheelProps> = ({
     return realSize;
   };
 
-  // Fonction pour tronquer le texte s'il est trop long
   const truncateText = (
     ctx: CanvasRenderingContext2D,
     text: string,
-    maxWidth: number,
+    fontSize: number,
+    radius: number,
   ): string => {
+    ctx.font = `${fontSize}px Poppins`; // Définit la police et la taille de la police
+    const maxWidth = radius * 0.5; // Ajuste la largeur maximale à 50% du rayon pour plus de place
+
     let truncatedText = text;
     if (ctx.measureText(text).width > maxWidth) {
-      while (
-        ctx.measureText(truncatedText + '...').width > maxWidth &&
-        truncatedText.length > 0
-      ) {
-        truncatedText = truncatedText.slice(0, -1); // Supprime un caractère à la fois
-      }
+      const visibleChars = Math.floor(
+        (maxWidth / ctx.measureText(text).width) * text.length,
+      );
+      truncatedText = text.slice(0, visibleChars); // Affiche plus de caractères avant la troncature
       truncatedText += '...'; // Ajoute "..." à la fin du texte tronqué
     }
     return truncatedText;
@@ -124,23 +135,30 @@ export const Wheel: React.FC<WheelProps> = ({
       startAngle: number,
       item: string,
     ): void => {
-      const maxTextWidth = radius - 320; // Ajuste la largeur maximale du texte
-      const truncatedItem = truncateText(ctx, item, maxTextWidth); // Tronque le texte si nécessaire
+      const fontSize = radius * 0.08; // Taille de la police en fonction du rayon
+      const truncatedItem = truncateText(ctx, item, fontSize, radius); // Tronque le texte si nécessaire
 
       ctx.save();
       ctx.translate(radius, radius);
       ctx.rotate(startAngle + anglePerItem / 2);
-      ctx.textAlign = 'center'; // Centre le texte par rapport au point de départ
-      ctx.fillStyle = textColor;
-      ctx.font = `${16 * resolutionMultiplier}px Poppins`;
 
-      ctx.strokeStyle = 'black';
-      ctx.lineWidth = 3;
-      ctx.strokeText(truncatedItem, radius / 2, 10); // Rapproche le texte du centre
-      ctx.fillText(truncatedItem, radius / 2, 10); // Rapproche le texte du centre
+      ctx.textAlign = 'center'; // Centre le texte horizontalement
+      ctx.fillStyle = textColor;
+      ctx.font = `${fontSize}px Poppins`;
+
+      const textX = radius * 0.6; // Ajuste la position du texte à 60% du rayon
+      const textY = 10; // Garde la hauteur constante
+
+      if (textStroke) {
+        ctx.strokeStyle = textStrokeColor;
+        ctx.lineWidth = textStrokeWidth;
+        ctx.strokeText(truncatedItem, textX, textY); // Dessine le contour du texte seulement si stroke est activé
+      }
+
+      ctx.fillText(truncatedItem, textX, textY); // Dessine le texte rempli
       ctx.restore();
     },
-    [anglePerItem, textColor, resolutionMultiplier],
+    [anglePerItem, textColor, textStroke, textStrokeColor, textStrokeWidth],
   );
 
   const drawSegment = useCallback(
