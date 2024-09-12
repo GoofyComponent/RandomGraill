@@ -43,13 +43,13 @@ const ResultRoulette: React.FC<ResultRouletteProps> = ({ result, show, setShow }
           clickable={true}
         />
       </div>
-      <div className="mt-6">
+      <div className="mt-6 flex flex-col sm:flex-row">
         <Link className="mx-2" to={result.url}>
           <Button>
             Maps <MapPin className="mx-2" color="#ffffff" strokeWidth={1.25} />
           </Button>
         </Link>
-        <Button className="mx-2" onClick={() => setShow(false)}>
+        <Button className="mx-2 mt-2 sm:mt-0" onClick={() => setShow(false)}>
           Fermer
         </Button>
       </div>
