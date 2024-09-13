@@ -21,6 +21,7 @@ interface WheelProps {
   textStroke?: boolean; // Nouveau booléen pour activer/désactiver le stroke
   textStrokeColor?: string; // Couleur du stroke
   textStrokeWidth?: number; // Taille du stroke
+  disabled?: boolean;
 }
 
 /**
@@ -50,6 +51,8 @@ interface WheelProps {
  * @param textStrokeWidth Taille du stroke du texte (optionnelle, par défaut 3).
  *
  * @param onResult Fonction appelée une fois que la roue s'arrête avec le résultat sélectionné (optionnelle).
+ *
+ * @param disabled Désactive le bouton si true (optionnelle, par défaut false).
  *
  * @example
  * ```tsx
@@ -82,6 +85,7 @@ export const Wheel: React.FC<WheelProps> = ({
   textStroke = true,
   textStrokeColor = 'black',
   textStrokeWidth = 3,
+  disabled = false,
   onResult,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -281,7 +285,10 @@ export const Wheel: React.FC<WheelProps> = ({
       <canvas ref={canvasRef} className={styles.canvas} />
       {!hideButton && (
         <button
-          onClick={spin}
+          onClick={() => {
+            if (disabled) return;
+            spin();
+          }}
           className={styles.spinButton}
           style={{
             backgroundColor: buttonColor,

@@ -47,6 +47,8 @@ export type Place = {
   vicinity: string;
   permanently_closed?: boolean;
   price_level?: number;
+  //BBYpass de triche TS
+  wheelId?: string;
 };
 
 export type GetClosestRestaurantsResponse = {

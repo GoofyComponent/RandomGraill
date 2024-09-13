@@ -1,63 +1,34 @@
-import CardRoulette from '@/components/project/cardRoulette.tsx';
+import { useLoaderData } from '@tanstack/react-router';
 
-const wheels = [
-  {
-    id: 1,
-    name: 'Wheel 1',
-    description: 'Wheel 1 description',
-  },
-  {
-    id: 2,
-    name: 'Wheel 2',
-    description: 'Wheel 2 description',
-  },
-  {
-    id: 3,
-    name: 'Wheel 3',
-    description: 'Wheel 3 description',
-  },
-  {
-    id: 4,
-    name: 'Wheel 1',
-    description: 'Wheel 1 description',
-  },
-  {
-    id: 5,
-    name: 'Wheel 2',
-    description: 'Wheel 2 description',
-  },
-  {
-    id: 6,
-    name: 'Wheel 3',
-    description: 'Wheel 3 description',
-  },
-  {
-    id: 7,
-    name: 'Wheel 1',
-    description: 'Wheel 1 description',
-  },
-  {
-    id: 8,
-    name: 'Wheel 2',
-    description: 'Wheel 2 description',
-  },
-  {
-    id: 9,
-    name: 'Wheel 3',
-    description: 'Wheel 3 description',
-  },
-];
+import CardRoulette from '@/components/project/cardRoulette.tsx';
+import Navbar from '@/components/project/navbar';
+import { Place } from '@/types/googleMaps';
 
 export const WheelsPage = () => {
+  const { userData } = useLoaderData({ from: '/_auth' });
+  const { wheels } = useLoaderData({
+    from: '/_auth/wheels/',
+  });
+
   return (
-    <div className="h-full w-full">
-      <div className="flex flex-wrap">
+    <div className="h-[calc(100vh-60px)] w-full">
+      <Navbar
+        userName={userData.displayName}
+        clickAvatarDirection="/account"
+        userPhoto={userData.photoURL}
+      />
+      <div className="mx-2 my-10 flex flex-wrap pb-10">
         <div className="w-1/2 sm:w-1/5">
-          <CardRoulette usage="add" name={'add'} url={'/wheels/add'} id={0} />
+          <CardRoulette usage="add" name={'add'} url={'/wheels/new'} id={'0'} />
         </div>
-        {wheels.map((wheel) => (
+        {wheels.map((item: Place) => (
           <div className="w-1/2 sm:w-1/5">
-            <CardRoulette name={wheel.name} url={`/wheels/${wheel.id}`} id={0} />
+            <CardRoulette
+              id={item.reference}
+              name={item.name}
+              url={'/wheels/' + item.wheelId}
+              clickable={true}
+            />
           </div>
         ))}
       </div>

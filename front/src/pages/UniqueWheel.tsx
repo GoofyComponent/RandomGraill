@@ -93,7 +93,7 @@ export const UniqueWheelPage = () => {
           {itemResto.map((item, index) => (
             <div key={index} className="mb-2 w-1/2 px-1 sm:w-1/3 md:w-1/4 lg:w-1/5">
               <CardResto
-                id={index}
+                id={index.toString()}
                 bgImage={item.img || ''}
                 name={item.name}
                 url="/restaurant/le-petit-bistro"
