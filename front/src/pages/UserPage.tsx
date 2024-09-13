@@ -17,7 +17,7 @@ export const UserPage = () => {
   const { userPreferences, updatePreferences } = useAuthStore();
   const { userData } = useLoaderData({ from: '/_auth' });
 
-  const [rangeArea, setRangeArea] = useState([userPreferences?.rangeArea ?? 500]);
+  const [rangeArea, setRangeArea] = useState([userPreferences?.rangeArea ?? 1000]);
   const rangeAreaRef = useRef(rangeArea);
 
   const updatePreferencesInDb = async () => {
@@ -75,8 +75,8 @@ export const UserPage = () => {
             onValueChange={(value) => {
               setRangeArea(value);
             }}
-            min={150}
-            max={1000}
+            min={500}
+            max={2000}
             step={50}
           />
         </div>

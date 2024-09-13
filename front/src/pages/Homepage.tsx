@@ -10,10 +10,12 @@ import CarouselCard from '@/components/project/carouselCard';
 import Navbar from '@/components/project/navbar';
 import { Wheel } from '@/components/project/wheel/wheel';
 import { functions } from '@/lib/firebase';
+import useUserStore from '@/stores/useUserStore';
 import { GetClosestRestaurantsResponse, Place } from '@/types/googleMaps';
 
 const Homepage: React.FC = () => {
   const getPlacesCall = httpsCallable(functions, 'getClosestRestaurants');
+  const { userPreferences } = useUserStore();
 
   const { userData } = useLoaderData({
     from: '/_auth',
@@ -24,16 +26,12 @@ const Homepage: React.FC = () => {
 
   const [closePlace, setClosePlace] = React.useState<Place[]>([]);
 
-  const handleResult = (result: string) => {
-    alert(`Selected item: ${result}`);
-  };
-
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(async (position) => {
       const places = (await getPlacesCall({
         lat: position.coords.latitude,
         lng: position.coords.longitude,
-        radius: 500,
+        radius: userPreferences ? userPreferences.rangeArea : 1000,
       })) as GetClosestRestaurantsResponse;
 
       //Set only the first 8 places
@@ -68,9 +66,8 @@ const Homepage: React.FC = () => {
               buttonBorderColor="#FEF4D7"
               needleColor="#FEF4D7"
               buttonLabel="Spin"
-              onResult={(name, place_id) => {
+              onResult={(name) => {
                 console.log('name', name);
-                handleResult(place_id);
               }}
               wheelBorderColor="#FEF4D7"
               disabled

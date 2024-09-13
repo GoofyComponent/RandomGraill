@@ -10,13 +10,13 @@ export async function createOrGetUser(
 
   if (oldUser) {
     useAuthStore.getState().updatePreferences({
-      rangeArea: oldUser.data.preferences?.radius ?? 500,
+      rangeArea: oldUser.data.preferences?.radius ?? 1000,
     });
 
     return await db2.user.upset(user.uid as Schema['user']['Id'], {
       name: user.displayName ?? 'N/A',
       email: user.email ?? 'N/A',
-      preferences: oldUser.data.preferences ?? { radius: 500 },
+      preferences: oldUser.data.preferences ?? { radius: 1000 },
       wheelsList: oldUser.data.wheelsList ?? [],
     });
   } else {
@@ -24,7 +24,7 @@ export async function createOrGetUser(
       name: user.displayName ?? 'N/A',
       email: user.email ?? 'N/A',
       preferences: {
-        radius: 500,
+        radius: 1000,
       },
       wheelsList: [],
     });

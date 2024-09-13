@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { db2, Schema } from '@/db/baseSchema';
 import { auth, functions } from '@/lib/firebase';
-import useAuthStore from '@/stores/useUserStore';
+import useUserStore from '@/stores/useUserStore';
 import { GetClosestRestaurantsResponse, Place } from '@/types/googleMaps';
 
 interface GetReadableAdressResponse {
@@ -67,7 +67,7 @@ const StepOne = ({
 const StepTwo = ({ wheelName }: { wheelName: string }) => {
   const getReadableAdress = httpsCallable(functions, 'getReadableAdress');
   const getPlacesCall = httpsCallable(functions, 'getClosestRestaurants');
-  const { userPreferences } = useAuthStore();
+  const { userPreferences } = useUserStore();
   const navigate = useNavigate();
 
   const [inputValue, setInputValue] = useState('');
@@ -96,7 +96,7 @@ const StepTwo = ({ wheelName }: { wheelName: string }) => {
       lat: saveCoords ? saveCoords.lat : undefined,
       lng: saveCoords ? saveCoords.lng : undefined,
       address: inputValue,
-      radius: userPreferences ? userPreferences.rangeArea : 500,
+      radius: userPreferences ? userPreferences.rangeArea : 1000,
     })) as GetClosestRestaurantsResponse;
     setPlaces(places.data);
     setIsLoadingAdress(false);

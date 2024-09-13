@@ -23,7 +23,7 @@ const useUserStore = create<UserState>()(
         set({
           user: userData,
           userPreferences: {
-            rangeArea: 500,
+            rangeArea: 1000,
           },
           isAuthenticated: true,
         }),
