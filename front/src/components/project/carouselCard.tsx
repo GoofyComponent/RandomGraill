@@ -51,7 +51,6 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ items, type }) => {
                   id={item.id}
                   bgImage={item.imageUrl || ''}
                   name={item.title}
-                  distance="500m"
                   url={item.url}
                   variant="carousel"
                   clickable={true}

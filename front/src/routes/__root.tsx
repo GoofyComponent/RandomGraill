@@ -2,6 +2,7 @@ import { createRootRoute, Outlet, redirect } from '@tanstack/react-router';
 import React, { Suspense } from 'react';
 
 import { auth } from '@/lib/firebase';
+
 export const Route = createRootRoute({
   beforeLoad: async ({ location }) => {
     await auth.authStateReady();

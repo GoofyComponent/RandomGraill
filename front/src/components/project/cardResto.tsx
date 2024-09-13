@@ -21,14 +21,12 @@ interface CardRestoProps {
   id: number;
   bgImage: string | null;
   name: string;
-  distance: string;
   type: string;
   note: number;
   priceRange: string;
   desc: string;
   mapLink: string;
   headerBgColor?: string;
-  footerBgColor?: string;
   variant?: 'default' | 'carousel' | 'disabled' | 'selected';
   clickable?: boolean;
   onClick?: () => void;
@@ -38,14 +36,12 @@ interface CardRestoProps {
 const CardResto: React.FC<CardRestoProps> = ({
   bgImage,
   name,
-  distance,
   type,
   note,
   priceRange,
   desc,
   mapLink,
   headerBgColor = 'bg-secondary',
-  footerBgColor = 'bg-accent',
   variant = 'default',
   clickable = true,
   onClick,
@@ -87,11 +83,6 @@ const CardResto: React.FC<CardRestoProps> = ({
             {name}
           </span>
         </h3>
-        <div
-          className={`${footerBgColor} inline-block self-end rounded-lg rounded-bl-none rounded-tr-none px-2 py-1`}
-        >
-          <p className="text-xxs md:text-xs">{distance}</p>
-        </div>
       </CardContent>
       {!clickable && (
         <div className="absolute right-2 top-2 z-20 text-white" onClick={openDialog}>

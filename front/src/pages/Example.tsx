@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import CardResto from '@/components/project/cardResto';
 import CarouselCard from '@/components/project/carouselCard';
 import ResultRoulette from '@/components/project/resultRoulettes';
@@ -71,7 +72,6 @@ export const Example = () => {
         id={0}
         bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
         name="Mcdo"
-        distance="500m"
         type="Restauration rapide"
         note={3.5}
         priceRange="10-20€"
@@ -87,7 +87,6 @@ export const Example = () => {
             id={1}
             bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
             name="Mcdo"
-            distance="500m"
             type="Restauration rapide"
             note={3.5}
             priceRange="10-20€"
@@ -102,7 +101,6 @@ export const Example = () => {
             id={2}
             bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
             name="Mcdo"
-            distance="500m"
             type="Restauration rapide"
             note={3.5}
             priceRange="10-20€"
@@ -117,7 +115,6 @@ export const Example = () => {
             id={3}
             bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
             name="Mcdo"
-            distance="500m"
             type="Restauration rapide"
             note={3.5}
             priceRange="10-20€"
@@ -132,7 +129,6 @@ export const Example = () => {
             id={4}
             bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
             name="Mcdo"
-            distance="500m"
             type="Restauration rapide"
             note={3.5}
             priceRange="10-20€"
@@ -147,7 +143,6 @@ export const Example = () => {
             id={5}
             bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
             name="Mcdo"
-            distance="500m"
             type="Restauration rapide"
             note={3.5}
             priceRange="10-20€"
@@ -162,7 +157,6 @@ export const Example = () => {
             id={6}
             bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
             name="Mcdo"
-            distance="500m"
             type="Restauration rapide"
             note={3.5}
             priceRange="10-20€"
@@ -177,7 +171,6 @@ export const Example = () => {
             id={7}
             bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
             name="Mcdo"
-            distance="500m"
             type="Restauration rapide"
             note={3.5}
             priceRange="10-20€"
@@ -192,7 +185,6 @@ export const Example = () => {
             id={8}
             bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
             name="Mcdo"
-            distance="500m"
             type="Restauration rapide"
             note={3.5}
             priceRange="10-20€"
@@ -207,7 +199,6 @@ export const Example = () => {
             id={9}
             bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
             name="Mcdo"
-            distance="500m"
             type="Restauration rapide"
             note={3.5}
             priceRange="10-20€"
@@ -221,7 +212,6 @@ export const Example = () => {
           <CardResto
             bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
             name="Mcdo"
-            distance="500m"
             type="Restauration rapide"
             note={3.5}
             priceRange="10-20€"
@@ -236,7 +226,6 @@ export const Example = () => {
           <CardResto
             bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
             name="Mcdo"
-            distance="500m"
             type="Restauration rapide"
             note={3.5}
             priceRange="10-20€"
@@ -251,7 +240,6 @@ export const Example = () => {
           <CardResto
             bgImage="https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg"
             name="Mcdo"
-            distance="500m"
             type="Restauration rapide"
             note={3.5}
             priceRange="10-20€"
