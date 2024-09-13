@@ -32,6 +32,7 @@ interface CardRestoProps {
   variant?: 'default' | 'carousel' | 'disabled' | 'selected';
   clickable?: boolean;
   onClick?: () => void;
+  url?: string;
 }
 
 const CardResto: React.FC<CardRestoProps> = ({
