@@ -4,7 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useRef } from 'react';
 
-import logo from '@/assets/images/logo-simple.svg';
+import logo from '@/assets/images/SimpleLogoOrange.svg';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';

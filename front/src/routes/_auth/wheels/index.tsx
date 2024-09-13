@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 
+import LoaderPage from '@/components/project/loaderPage';
 import { db2, Schema2 } from '@/db/baseSchema';
 import { WheelsPage } from '@/pages/WheelsPage.tsx';
 import useUserStore from '@/stores/useUserStore';
@@ -30,4 +31,5 @@ export const Route = createFileRoute('/_auth/wheels/')({
     }
   },
   component: () => <WheelsPage />,
+  pendingComponent: () => <LoaderPage />,
 });

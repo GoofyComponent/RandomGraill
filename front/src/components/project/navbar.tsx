@@ -1,7 +1,7 @@
 import { Link, useMatch, useRouter } from '@tanstack/react-router';
 import { ArrowLeft } from 'lucide-react';
 
-import logo from '@/assets/images/logo-simple.svg';
+import logo from '@/assets/images/SimpleLogoOrange.svg';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const Navbar = ({
@@ -29,7 +29,9 @@ const Navbar = ({
             strokeWidth={2}
           />
         )}
-        <img src={logo} alt="Logo" className="h-12 w-12" />
+        <Link to="/homepage">
+          <img src={logo} alt="Logo" className="h-12 w-12" />
+        </Link>
         <Link to={clickAvatarDirection}>
           <Avatar className="h-12 w-12 rounded-full border border-gray-300">
             <AvatarImage src={userPhoto} />

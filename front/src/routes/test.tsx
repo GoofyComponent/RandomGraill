@@ -1,7 +1,8 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
 
 // import { Example } from '@/pages/Example';
-import { WheelEditPage } from '@/pages/WheelEditPage.tsx';
+//import { WheelEditPage } from '@/pages/WheelEditPage.tsx';
+import LoaderPage from '@/components/project/loaderPage.tsx';
 
 export const Route = createFileRoute('/test')({
   beforeLoad: async () => {
@@ -11,5 +12,5 @@ export const Route = createFileRoute('/test')({
       });
     }
   },
-  component: () => <WheelEditPage />,
+  component: () => <LoaderPage />,
 });

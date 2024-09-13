@@ -96,14 +96,14 @@ const CardResto: React.FC<CardRestoProps> = ({
 
   const dialogCard = (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-      <DialogContent>
+      <DialogContent className="rounded">
         <DialogHeader>
           <DialogTitle>{name}</DialogTitle>
         </DialogHeader>
         <div className="align-item">
           {type === undefined ? <p>No information</p> : <p>{type}</p>}
           {note === undefined ? <p>No rating</p> : <Stars note={note} />}
-          <img src={bgImage ? bgImage : defaultImage} />
+          <img className="mb-4 mt-4 rounded" src={bgImage ? bgImage : defaultImage} />
           {priceRange === undefined ? (
             <p>No price range</p>
           ) : (

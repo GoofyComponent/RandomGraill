@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 
+import LoaderPage from '@/components/project/loaderPage';
 import { db2, Schema2 } from '@/db/baseSchema';
 import Homepage from '@/pages/Homepage';
 import useUserStore from '@/stores/useUserStore';
@@ -31,4 +32,5 @@ export const Route = createFileRoute('/_auth/homepage')({
     }
   },
   component: () => <Homepage />,
+  pendingComponent: () => <LoaderPage />,
 });
