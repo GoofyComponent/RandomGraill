@@ -1,24 +1,24 @@
-import { Link, useLoaderData } from '@tanstack/react-router';
-import { Ellipsis } from 'lucide-react';
+import { useLoaderData, useParams } from '@tanstack/react-router';
+import { Star, StarOff } from 'lucide-react';
 import { useState } from 'react';
 
 import CardResto from '@/components/project/cardResto';
 import Navbar from '@/components/project/navbar';
 import ResultRoulette from '@/components/project/resultRoulettes';
 import { Wheel } from '@/components/project/wheel/wheel';
+import { db2 } from '@/db/baseSchema';
 import { Place } from '@/types/googleMaps';
 
 export const UniqueWheelPage = () => {
+  const params = useParams({ from: '/_auth/wheels/$wheelId' });
   const { userData } = useLoaderData({
     from: '/_auth',
   });
-
-  const { wheel } = useLoaderData({ from: '/_auth/wheels/$wheelId' });
-
-  console.log('wheel', wheel);
+  const { wheel, favoriteWheels } = useLoaderData({ from: '/_auth/wheels/$wheelId' });
 
   const [showResult, setShowResult] = useState(false);
   const [wheelResult, setWheelResult] = useState<Place | null>(null);
+  const [isFavorite, setIsFavorite] = useState(favoriteWheels === params.wheelId);
   const handleResult = (place_id: string) => {
     const selectedItem = wheel.restaurants.find(
       (restaurant: { place_id: string }) => restaurant.place_id === place_id,
@@ -29,6 +29,13 @@ export const UniqueWheelPage = () => {
     }
     console.log('wheelResult', wheelResult);
     setShowResult(true);
+  };
+
+  const handleFavorite = async () => {
+    await db2.user.upset(userData.uid, {
+      favoriteWheels: params.wheelId,
+    });
+    setIsFavorite(!isFavorite);
   };
 
   return (
@@ -43,13 +50,17 @@ export const UniqueWheelPage = () => {
       <div className="h-full w-full px-2 sm:px-0">
         <div className="mb-4 flex flex-wrap justify-center">
           <div className="h-5/6 w-5/6 sm:w-1/4">
-            <p className="my-3 text-center text-xl font-medium text-black">
-              {wheel?.name}
-            </p>
-            <div className="absolute right-0 top-0 m-4">
-              <Link to="/">
-                <Ellipsis />
-              </Link>
+            <div className="flex items-center justify-center space-x-4">
+              <p className="my-3 text-center text-xl font-medium text-black">
+                {wheel?.name}
+              </p>
+              <div onClick={handleFavorite}>
+                {isFavorite ? (
+                  <Star className="mx-auto h-8 w-8 text-primary" />
+                ) : (
+                  <StarOff className="mx-auto h-8 w-8 text-primary" />
+                )}
+              </div>
             </div>
             <Wheel
               items={wheel?.restaurants.map(
