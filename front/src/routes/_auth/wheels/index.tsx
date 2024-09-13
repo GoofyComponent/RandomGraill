@@ -32,4 +32,6 @@ export const Route = createFileRoute('/_auth/wheels/')({
   },
   component: () => <WheelsPage />,
   pendingComponent: () => <LoaderPage />,
+  gcTime: 0,
+  shouldReload: false,
 });

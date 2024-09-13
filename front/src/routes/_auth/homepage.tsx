@@ -50,4 +50,6 @@ export const Route = createFileRoute('/_auth/homepage')({
   },
   component: () => <Homepage />,
   pendingComponent: () => <LoaderPage />,
+  gcTime: 0,
+  shouldReload: false,
 });

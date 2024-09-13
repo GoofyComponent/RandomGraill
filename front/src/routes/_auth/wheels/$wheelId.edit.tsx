@@ -14,6 +14,8 @@ export const Route = createFileRoute('/_auth/wheels/$wheelId/edit')({
   },
   component: () => <WheelEditPage />,
   pendingComponent: () => <LoaderPage />,
+  gcTime: 0,
+  shouldReload: false,
 });
 
 const fetchWheel = async (wheelId: TypesaurusCore.Id<'wheels'>) => {

@@ -86,7 +86,7 @@ export const UniqueWheelPage = () => {
         </div>
 
         <div className="my-8">
-          <p className="mb-2 flex flex-wrap">Les restaurants</p>
+          <p className="mb-2 flex flex-wrap">The restaurants</p>
           <div className="-mx-1 flex flex-wrap">
             {wheel.restaurants.map((item: Place, index: number) => (
               <div key={index} className="mb-2 w-1/2 px-1 sm:w-1/3 md:w-1/4 lg:w-1/5">

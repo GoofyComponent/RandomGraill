@@ -12,6 +12,8 @@ export const Route = createFileRoute('/_auth')({
   },
   component: () => <AuthLayout />,
   pendingComponent: () => <LoaderPage />,
+  gcTime: 0,
+  shouldReload: false,
 });
 
 const AuthLayout = () => {
