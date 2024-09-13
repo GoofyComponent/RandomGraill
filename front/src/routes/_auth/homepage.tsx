@@ -10,6 +10,8 @@ export const Route = createFileRoute('/_auth/homepage')({
     const userId = useUserStore.getState().user?.uid;
     const getUserWheels = await db2.user.get(userId as Schema2['user']['Id']);
 
+    const favoriteWheelId = getUserWheels?.data.favoriteWheels || null;
+
     if (!getUserWheels || !getUserWheels.data.wheelsList) {
       return {
         wheelsId: [],
@@ -25,9 +27,24 @@ export const Route = createFileRoute('/_auth/homepage')({
           wheels.push(getWheelById.data);
         }
       }
+
+      let favoriteWheel = null;
+      if (!favoriteWheelId) {
+        favoriteWheel = wheels[0];
+      } else {
+        const getFavoriteWheel = await db2.wheels.get(favoriteWheelId);
+        if (getFavoriteWheel) {
+          favoriteWheel = getFavoriteWheel.data;
+          favoriteWheel.wheelId = favoriteWheelId;
+        } else {
+          favoriteWheel = wheels[0];
+        }
+      }
+
       return {
         wheelsId: getUserWheels.data.wheelsList.slice(0, 10),
         wheels: wheels.slice(0, 10),
+        favoriteWheel: favoriteWheel,
       };
     }
   },

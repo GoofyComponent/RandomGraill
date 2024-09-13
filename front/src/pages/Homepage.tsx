@@ -18,7 +18,7 @@ const Homepage: React.FC = () => {
   const { userData } = useLoaderData({
     from: '/_auth',
   });
-  const { wheels } = useLoaderData({
+  const { wheels, favoriteWheel } = useLoaderData({
     from: '/_auth/homepage',
   });
 
@@ -54,18 +54,25 @@ const Homepage: React.FC = () => {
       <div className="flex flex-wrap justify-center">
         <p className="my-3 text-xl font-medium text-black">Favorite wheel</p>
         <div className="h-5/6 w-5/6">
-          <Link to={`/wheels/${'arecupfromleback'}`}>
+          <Link to={`/wheels/${favoriteWheel.wheelId}`}>
             <Wheel
-              items={["McDonald's Vincennes", 'La Banquette', 'Street Wok']}
+              items={favoriteWheel?.restaurants.map(
+                (restaurant: { name: string; place_id: string }) => ({
+                  name: restaurant.name,
+                  place_id: restaurant.place_id,
+                }),
+              )}
               colors={['#FF7549', '#F6C14B', '#ff7700']}
               buttonColor="#FEF4D7"
               buttonTextColor="#000000"
               buttonBorderColor="#FEF4D7"
               needleColor="#FEF4D7"
               buttonLabel="Spin"
-              onResult={(result) => handleResult(result)}
+              onResult={(name, place_id) => {
+                console.log('name', name);
+                handleResult(place_id);
+              }}
               wheelBorderColor="#FEF4D7"
-              textStroke={false}
               disabled
             />
           </Link>
