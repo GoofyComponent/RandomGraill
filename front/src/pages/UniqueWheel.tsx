@@ -87,7 +87,8 @@ export const UniqueWheelPage = () => {
                   note={item.rating}
                   priceRange={item.price_level ? item.price_level.toString() : ''}
                   desc={item.vicinity}
-                  mapLink={`http://maps.google.com/?q=${item.name}, ${item.vicinity}`}
+                  //mapLink={`http://maps.google.com/?q=${item.name}, ${item.vicinity}`}
+                  mapLink={`comgooglemaps://?q=${item.name}, ${item.vicinity}`}
                 />
               </div>
             ))}
