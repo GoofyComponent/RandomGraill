@@ -52,7 +52,7 @@ const Homepage: React.FC = () => {
         />
       </div>
       <div className="flex flex-wrap justify-center">
-        <p className="my-3 text-xl font-medium text-black">Favorite Wheel</p>
+        <p className="my-3 text-xl font-medium text-black">Favorite wheel</p>
         <div className="h-5/6 w-5/6">
           <Link to={`/wheels/${'arecupfromleback'}`}>
             <Wheel
@@ -74,19 +74,19 @@ const Homepage: React.FC = () => {
       <div className="my-3 pl-3">
         <Link to="/wheels">
           <p className="flex flex-wrap pb-1 pt-2">
-            Mes roulettes <ChevronRight />
+            My wheels <ChevronRight />
           </p>
         </Link>
         <CarouselCard items={wheels} type="cardRoulette" />
 
         {closePlace.length ? (
           <>
-            <p className="flex flex-wrap pb-1 pt-2">Les restaurants proches</p>
+            <p className="flex flex-wrap pb-1 pt-2">Nerby restaurants</p>
             <CarouselCard items={closePlace} type="cardResto" />
           </>
         ) : (
           <>
-            <p className="flex flex-wrap pb-1 pt-2">Les restaurants proches</p>
+            <p className="flex flex-wrap pb-1 pt-2">Nerby restaurants</p>
             <p className="text-center">No restaurants found nearby</p>
           </>
         )}

@@ -1,5 +1,6 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 
+import LoaderPage from '@/components/project/loaderPage';
 import { auth } from '@/lib/firebase';
 
 export const Route = createFileRoute('/_auth')({
@@ -10,6 +11,7 @@ export const Route = createFileRoute('/_auth')({
     };
   },
   component: () => <AuthLayout />,
+  pendingComponent: () => <LoaderPage />,
 });
 
 const AuthLayout = () => {
