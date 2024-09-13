@@ -43,7 +43,7 @@ const ResultRoulette: React.FC<ResultRouletteProps> = ({ result, show, setShow }
           note={result.rating}
           priceRange={result.price_level ? result.price_level.toString() : ''}
           desc={result.vicinity}
-          mapLink={`https://www.google.com/maps/place/?q=place_id:${result.place_id}`}
+          mapLink={`http://maps.google.com/?q=${result.name}, ${result.vicinity}`}
         />
       </div>
       <div className="mt-6 flex flex-col sm:flex-row">
