@@ -41,6 +41,7 @@ export interface User2 {
     radius: number;
   };
   wheelsList?: Schema['wheels']['Id'][];
+  favoriteWheels?: Schema['wheels']['Id'];
 }
 
 export interface Wheel2 {
