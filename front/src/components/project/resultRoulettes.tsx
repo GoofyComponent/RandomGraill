@@ -42,6 +42,11 @@ const ResultRoulette: React.FC<ResultRouletteProps> = ({ result, show, setShow }
           variant="default"
           bgImage={result.bgImage}
           clickable={true}
+          type=""
+          note={0}
+          priceRange=""
+          desc=""
+          mapLink=""
         />
       </div>
       <div className="mt-6 flex flex-col sm:flex-row">
