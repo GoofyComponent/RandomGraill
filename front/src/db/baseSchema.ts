@@ -1,5 +1,7 @@
 import { schema, Typesaurus } from 'typesaurus';
 
+import { Place } from '@/types/googleMaps';
+
 interface User {
   name: string;
   email: string;
@@ -30,6 +32,25 @@ export const db = schema(($) => ({
     wheels: $.collection<UserWheel>(),
   }),
   wheels: $.collection<Wheel>(),
+}));
+
+export interface User2 {
+  name?: string;
+  email?: string;
+  preferences?: {
+    radius: number;
+  };
+  wheelsList?: Schema['wheels']['Id'][];
+}
+
+export interface Wheel2 {
+  name: string;
+  restaurants: Place[];
+}
+
+export const db2 = schema(($) => ({
+  user: $.collection<User2>(),
+  wheels: $.collection<Wheel2>(),
 }));
 
 export type Schema = Typesaurus.Schema<typeof db>;

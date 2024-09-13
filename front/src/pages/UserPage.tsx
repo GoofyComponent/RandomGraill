@@ -8,6 +8,7 @@ import logo from '@/assets/images/logo-simple.svg';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
+import { db2 } from '@/db/baseSchema';
 import { logOut } from '@/lib/firebase';
 import useAuthStore from '@/stores/useUserStore';
 
@@ -16,8 +17,22 @@ export const UserPage = () => {
   const { userPreferences, updatePreferences } = useAuthStore();
   const { userData } = useLoaderData({ from: '/_auth' });
 
-  const [rangeArea, setRangeArea] = useState([500]);
+  const [rangeArea, setRangeArea] = useState([userPreferences?.rangeArea ?? 500]);
   const rangeAreaRef = useRef(rangeArea);
+
+  const updatePreferencesInDb = async () => {
+    if (rangeAreaRef.current[0] !== undefined) {
+      updatePreferences({
+        rangeArea: rangeAreaRef.current[0],
+      });
+
+      await db2.user.upset(userData.uid, {
+        preferences: {
+          radius: rangeAreaRef.current[0],
+        },
+      });
+    }
+  };
 
   useEffect(() => {
     if (userPreferences) {
@@ -25,11 +40,7 @@ export const UserPage = () => {
     }
 
     return () => {
-      if (rangeAreaRef.current[0] !== undefined) {
-        updatePreferences({
-          rangeArea: rangeAreaRef.current[0],
-        });
-      }
+      updatePreferencesInDb();
     };
     // We only want to run this effect once
     // eslint-disable-next-line react-hooks/exhaustive-deps

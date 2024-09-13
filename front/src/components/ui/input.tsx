@@ -11,7 +11,7 @@ const inputVariants = cva(
         locate: 'text-xl flex items-center justify-between',
       },
       size: {
-        randomgraill: 'h-7 min-w-[375px] pt-4',
+        randomgraill: 'h-7 py-4 ',
       },
     },
     defaultVariants: {

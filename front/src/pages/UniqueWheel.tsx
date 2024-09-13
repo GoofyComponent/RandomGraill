@@ -96,7 +96,6 @@ export const UniqueWheelPage = () => {
                 id={index}
                 bgImage={item.img || ''}
                 name={item.name}
-                distance={item.distance}
                 url="/restaurant/le-petit-bistro"
                 variant="default"
                 clickable={true}

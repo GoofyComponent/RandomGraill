@@ -95,7 +95,6 @@ export const WheelEditPage = () => {
                 }}
                 key={restaurant.id}
                 name={restaurant.name}
-                distance={restaurant.distance}
                 bgImage={restaurant.image}
                 url={''}
                 variant={restaurant.active ? 'default' : 'disabled'}

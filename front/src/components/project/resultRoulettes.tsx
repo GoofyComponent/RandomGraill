@@ -38,7 +38,6 @@ const ResultRoulette: React.FC<ResultRouletteProps> = ({ result, show, setShow }
           id={0}
           name={result.name}
           url={result.url}
-          distance="100m"
           variant="default"
           bgImage={result.bgImage}
           clickable={true}

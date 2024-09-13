@@ -36,6 +36,6 @@
     "forceConsistentCasingInFileNames": true,
     "types": ["vite-plugin-pwa/client"]
   },
-  "include": ["src", "firebaseCredentials.ts", "vite.config.mts"],
+  "include": ["src", "./firebaseCredentials.ts", "./vite.config.mts"],
   "exclude": ["node_modules", "dist"]
 }
