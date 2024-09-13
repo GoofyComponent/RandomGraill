@@ -100,6 +100,11 @@ export const WheelEditPage = () => {
                 url={''}
                 variant={restaurant.active ? 'default' : 'disabled'}
                 id={restaurant.id}
+                type=""
+                note={0}
+                priceRange=""
+                desc=""
+                mapLink=""
               />
             </div>
           );

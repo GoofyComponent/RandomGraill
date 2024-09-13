@@ -100,6 +100,11 @@ export const UniqueWheelPage = () => {
                 url="/restaurant/le-petit-bistro"
                 variant="default"
                 clickable={true}
+                type=""
+                note={0}
+                priceRange=""
+                desc=""
+                mapLink=""
               />
             </div>
           ))}

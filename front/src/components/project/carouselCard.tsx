@@ -55,6 +55,11 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ items, type }) => {
                   url={item.url}
                   variant="carousel"
                   clickable={true}
+                  type=""
+                  note={0}
+                  priceRange=""
+                  desc=""
+                  mapLink=""
                 />
               </CarouselItem>
             )}
