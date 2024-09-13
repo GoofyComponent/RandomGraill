@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 
 interface CardRestoProps {
   id: number;
-  bgImage: string;
+  bgImage: string | null;
   name: string;
   distance: string;
   url: string;
@@ -17,7 +17,7 @@ interface CardRestoProps {
 }
 
 const CardResto: React.FC<CardRestoProps> = ({
-  bgImage = '/src/assets/images/bg-card-resto.png',
+  bgImage,
   name,
   distance,
   url,
@@ -27,6 +27,7 @@ const CardResto: React.FC<CardRestoProps> = ({
   clickable = true,
   onClick,
 }) => {
+  const defaultImage = '/src/assets/images/bg-card-resto.png';
   const cardContent = (
     <Card
       className={`group relative ${variant === 'carousel' ? 'h-20' : 'h-24'} w-full overflow-hidden transition-shadow hover:shadow-lg`}
@@ -42,7 +43,7 @@ const CardResto: React.FC<CardRestoProps> = ({
         className={`absolute inset-0 z-0 h-full bg-cover bg-center transition-transform duration-300 ${
           clickable ? 'group-hover:scale-105' : ''
         }`}
-        style={{ backgroundImage: `url(${bgImage})` }}
+        style={{ backgroundImage: `url(${bgImage || defaultImage})` }}
       />
       <CardContent className="relative z-20 flex h-full flex-col justify-between p-0 text-white">
         <h3 className="text-xxs md:text-xs">
