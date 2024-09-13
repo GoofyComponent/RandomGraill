@@ -10,7 +10,6 @@ export const UniqueWheelPage = () => {
   const itemResto = [
     {
       name: 'Item 1',
-      img: 'https://www.mcdo-strasbourg.fr/wp-content/uploads/2022/03/IMG_20220609_09374722-scaled-e1655131454477.jpg',
       url: '/restaurant/le-petit-bistro',
       distance: '500m',
     },

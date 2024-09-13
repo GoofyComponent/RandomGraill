@@ -17,7 +17,7 @@ interface CardRestoProps {
 }
 
 const CardResto: React.FC<CardRestoProps> = ({
-  bgImage,
+  bgImage = '/src/assets/images/bg-card-resto.png',
   name,
   distance,
   url,
