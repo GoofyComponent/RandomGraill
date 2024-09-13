@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
+import { Place } from '@/types/googleMaps';
+
 import styles from './wheel.module.css';
 
 interface WheelProps {
-  items: string[];
+  items: Place[];
   colors?: string[];
   wheelBorderColor?: string;
   borderSize?: number;
@@ -17,7 +19,7 @@ interface WheelProps {
   hideButton?: boolean;
   buttonSize?: string;
   buttonTextSize?: string;
-  onResult?: (result: string) => void;
+  onResult?: (name: string, place_id: string) => void;
   textStroke?: boolean; // Nouveau booléen pour activer/désactiver le stroke
   textStrokeColor?: string; // Couleur du stroke
   textStrokeWidth?: number; // Taille du stroke
@@ -122,7 +124,7 @@ export const Wheel: React.FC<WheelProps> = ({
     const maxWidth = radius * 0.5; // Ajuste la largeur maximale à 50% du rayon pour plus de place
 
     let truncatedText = text;
-    if (ctx.measureText(text).width > maxWidth) {
+    if (typeof text === 'string' && ctx.measureText(text).width > maxWidth) {
       const visibleChars = Math.floor(
         (maxWidth / ctx.measureText(text).width) * text.length,
       );
@@ -137,10 +139,10 @@ export const Wheel: React.FC<WheelProps> = ({
       ctx: CanvasRenderingContext2D,
       radius: number,
       startAngle: number,
-      item: string,
+      item: Place,
     ): void => {
       const fontSize = radius * 0.08; // Taille de la police en fonction du rayon
-      const truncatedItem = truncateText(ctx, item, fontSize, radius); // Tronque le texte si nécessaire
+      const truncatedItem = truncateText(ctx, item.name, fontSize, radius); // Tronque le texte si nécessaire
 
       ctx.save();
       ctx.translate(radius, radius);
@@ -166,12 +168,7 @@ export const Wheel: React.FC<WheelProps> = ({
   );
 
   const drawSegment = useCallback(
-    (
-      ctx: CanvasRenderingContext2D,
-      radius: number,
-      index: number,
-      item: string,
-    ): void => {
+    (ctx: CanvasRenderingContext2D, radius: number, index: number, item: Place): void => {
       const startAngle = index * anglePerItem + rotation;
       const endAngle = startAngle + anglePerItem;
       const color =
@@ -206,7 +203,7 @@ export const Wheel: React.FC<WheelProps> = ({
     const radius = size / 2;
     ctx.clearRect(0, 0, size, size);
 
-    items.forEach((item: string, index: number) => {
+    items.forEach((item: Place, index: number) => {
       drawSegment(ctx, radius, index, item);
     });
   }, [items, drawSegment]);
@@ -264,7 +261,7 @@ export const Wheel: React.FC<WheelProps> = ({
     setIsSpinning(false);
 
     if (onResult && result) {
-      onResult(result);
+      onResult(result.name, result.place_id);
     }
   };
 

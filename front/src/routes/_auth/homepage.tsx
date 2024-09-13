@@ -25,8 +25,8 @@ export const Route = createFileRoute('/_auth/homepage')({
         }
       }
       return {
-        wheelsId: getUserWheels.data.wheelsList,
-        wheels: wheels,
+        wheelsId: getUserWheels.data.wheelsList.slice(0, 10),
+        wheels: wheels.slice(0, 10),
       };
     }
   },

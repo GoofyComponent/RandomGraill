@@ -2,15 +2,13 @@ import { Link } from '@tanstack/react-router';
 import { MapPin } from 'lucide-react';
 import React, { useEffect } from 'react';
 
+import { Place } from '@/types/googleMaps';
+
 import { Button } from '../ui/button';
 import CardResto from './cardResto';
 
 interface ResultRouletteProps {
-  result: {
-    name: string;
-    url: string;
-    bgImage: string;
-  };
+  result: Place;
   show: boolean;
   setShow: (show: boolean) => void;
 }
@@ -35,21 +33,26 @@ const ResultRoulette: React.FC<ResultRouletteProps> = ({ result, show, setShow }
       <h3 className="my-6 text-2xl">Nous mangeons chez</h3>
       <div className="flex w-full scale-125 justify-center">
         <CardResto
-          id={'0'}
+          id={result.reference}
           name={result.name}
-          url={result.url}
+          url=""
           variant="default"
-          bgImage={result.bgImage}
-          clickable={true}
-          type=""
-          note={0}
-          priceRange=""
-          desc=""
-          mapLink=""
+          bgImage={result.photos && result.photos[0] ? result.photos[0].url : ''}
+          clickable={false}
+          type={result.types && result.types[0] ? result.types[0] : ''}
+          note={result.rating}
+          priceRange={result.price_level ? result.price_level.toString() : ''}
+          desc={result.vicinity}
+          mapLink={`https://www.google.com/maps/place/?q=place_id:${result.place_id}`}
         />
       </div>
       <div className="mt-6 flex flex-col sm:flex-row">
-        <Link className="mx-2" to={result.url}>
+        <Link
+          className="mx-2"
+          to={`https://www.google.com/maps/place/?q=place_id:${result.place_id}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Button>
             Maps <MapPin className="mx-2" color="#ffffff" strokeWidth={1.25} />
           </Button>
