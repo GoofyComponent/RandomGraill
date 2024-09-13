@@ -49,7 +49,7 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ items, type }) => {
               <CarouselItem className="min-w-40">
                 <CardResto
                   id={item.id}
-                  bgImage={item.imageUrl}
+                  bgImage={item.imageUrl || ''}
                   name={item.title}
                   distance="500m"
                   url={item.url}
