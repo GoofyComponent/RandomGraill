@@ -64,6 +64,7 @@ export const UniqueWheelPage = () => {
               buttonBorderColor="#FEF4D7"
               needleColor="#FEF4D7"
               buttonLabel="Spin"
+              textStroke={false}
               onResult={(name, place_id) => {
                 console.log('name', name);
                 handleResult(place_id);
