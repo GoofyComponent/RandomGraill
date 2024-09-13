@@ -86,7 +86,6 @@ const StepTwo = ({ wheelName }: { wheelName: string }) => {
       })) as GetReadableAdressResponse;
 
       setSaveCoords({ lat: position.coords.latitude, lng: position.coords.longitude });
-      console.log(response);
       setAdressReadable(response.data);
     });
   };
@@ -99,7 +98,6 @@ const StepTwo = ({ wheelName }: { wheelName: string }) => {
       address: inputValue,
       radius: userPreferences ? userPreferences.rangeArea : 500,
     })) as GetClosestRestaurantsResponse;
-    console.log(places);
     setPlaces(places.data);
     setIsLoadingAdress(false);
   };
@@ -131,12 +129,11 @@ const StepTwo = ({ wheelName }: { wheelName: string }) => {
       ? [...previousWheels.data.wheelsList, newWheel.id]
       : [newWheel.id];
 
-    const user = await db2.user.upset(auth.currentUser.uid as Schema['user']['Id'], {
+    await db2.user.upset(auth.currentUser.uid as Schema['user']['Id'], {
       wheelsList: updatedWheelsList,
       preferences: previousWheels.data.preferences || { radius: 0 }, // Ajoutez une valeur par défaut si nécessaire
     });
 
-    console.log(user);
     setIsLoadingSelectedPlaces(false);
     return navigate({
       to: `/wheels/${newWheel.id}`,
@@ -146,10 +143,6 @@ const StepTwo = ({ wheelName }: { wheelName: string }) => {
   useEffect(() => {
     setInputValue(adressReadable);
   }, [adressReadable]);
-
-  useEffect(() => {
-    console.log('selectedPlace', selectedPlace);
-  }, [selectedPlace]);
 
   return (
     <div className="mx-4 flex h-[80vh] flex-col justify-center">
@@ -173,7 +166,7 @@ const StepTwo = ({ wheelName }: { wheelName: string }) => {
           {places.map((item, index) => (
             <div key={index} className="mb-2 w-1/2 px-1 sm:w-1/3 md:w-1/4 lg:w-1/5">
               <CardResto
-                id={index}
+                id={item.reference}
                 bgImage={
                   item.photos && item.photos[0]
                     ? item.photos[0].url

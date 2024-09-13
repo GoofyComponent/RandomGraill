@@ -9,7 +9,6 @@ export async function createOrGetUser(
   const oldUser = await db2.user.get(user.uid as Schema['user']['Id']);
 
   if (oldUser) {
-    console.log(oldUser.data.preferences?.radius);
     useAuthStore.getState().updatePreferences({
       rangeArea: oldUser.data.preferences?.radius ?? 500,
     });

@@ -46,6 +46,7 @@ export interface User2 {
 export interface Wheel2 {
   name: string;
   restaurants: Place[];
+  wheelId?: string;
 }
 
 export const db2 = schema(($) => ({
@@ -54,3 +55,4 @@ export const db2 = schema(($) => ({
 }));
 
 export type Schema = Typesaurus.Schema<typeof db>;
+export type Schema2 = Typesaurus.Schema<typeof db>;

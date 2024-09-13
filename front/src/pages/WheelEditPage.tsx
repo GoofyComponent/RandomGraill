@@ -98,7 +98,7 @@ export const WheelEditPage = () => {
                 bgImage={restaurant.image}
                 url={''}
                 variant={restaurant.active ? 'default' : 'disabled'}
-                id={restaurant.id}
+                id={restaurant.id.toString()}
                 type=""
                 note={0}
                 priceRange=""

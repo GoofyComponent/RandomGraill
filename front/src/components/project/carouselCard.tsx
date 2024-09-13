@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import { Place } from '@/types/googleMaps';
 
 import CardResto from './cardResto';
 import CardRoulette from './cardRoulette';
 
 interface CarouselCardProps {
-  items: Array<{ id: number; title: string; url: string; imageUrl: string }>;
+  items: Place[];
   type: 'cardRoulette' | 'cardResto';
 }
 
@@ -15,6 +16,7 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ items, type }) => {
     <Carousel
       opts={{
         align: 'start',
+        dragFree: true,
       }}
       className="w-full"
     >
@@ -23,7 +25,7 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ items, type }) => {
           <div className="carousel-card">
             <CarouselItem className="min-w-40">
               <CardRoulette
-                id={0}
+                id={'0'}
                 name="Add"
                 url={`${window.location.origin}/wheels/new`}
                 variant="carousel"
@@ -34,13 +36,13 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ items, type }) => {
           </div>
         )}
         {items.map((item) => (
-          <div key={item.id} className="carousel-card">
+          <div key={item.reference} className="carousel-card">
             {type === 'cardRoulette' ? (
               <CarouselItem className="min-w-40">
                 <CardRoulette
-                  id={item.id}
-                  name={item.title}
-                  url={item.url}
+                  id={item.reference}
+                  name={item.name}
+                  url={'/wheels/' + item.wheelId}
                   variant="carousel"
                   clickable={true}
                 />
@@ -48,17 +50,16 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ items, type }) => {
             ) : (
               <CarouselItem className="min-w-40">
                 <CardResto
-                  id={item.id}
-                  bgImage={item.imageUrl || ''}
-                  name={item.title}
-                  url={item.url}
+                  id={item.reference}
+                  bgImage={item.photos && item.photos[0] ? item.photos[0].url : ''}
+                  name={item.name}
                   variant="carousel"
                   clickable={true}
-                  type=""
-                  note={0}
-                  priceRange=""
-                  desc=""
-                  mapLink=""
+                  type={item.types && item.types[0] ? item.types[0] : ''}
+                  note={item.rating}
+                  priceRange={item.price_level ? item.price_level.toString() : ''}
+                  desc={item.vicinity}
+                  mapLink={`http://maps.google.com/?q=${item.name}, ${item.vicinity}`}
                 />
               </CarouselItem>
             )}

@@ -18,7 +18,7 @@ import { Button } from '../ui/button';
 import Stars from '../ui/stars';
 
 interface CardRestoProps {
-  id: number;
+  id: string;
   bgImage: string | null;
   name: string;
   type: string;
