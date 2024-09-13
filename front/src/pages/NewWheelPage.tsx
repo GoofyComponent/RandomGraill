@@ -1,4 +1,4 @@
-import { useLoaderData } from '@tanstack/react-router';
+import { useLoaderData, useNavigate } from '@tanstack/react-router';
 import { httpsCallable } from 'firebase/functions';
 import { useEffect, useState } from 'react';
 
@@ -68,13 +68,15 @@ const StepTwo = ({ wheelName }: { wheelName: string }) => {
   const getReadableAdress = httpsCallable(functions, 'getReadableAdress');
   const getPlacesCall = httpsCallable(functions, 'getClosestRestaurants');
   const { userPreferences } = useAuthStore();
+  const navigate = useNavigate();
 
   const [inputValue, setInputValue] = useState('');
   const [adressReadable, setAdressReadable] = useState('');
+  const [isLoadingAdress, setIsLoadingAdress] = useState(false);
   const [saveCoords, setSaveCoords] = useState({ lat: 0, lng: 0 });
   const [places, setPlaces] = useState<Place[]>([]);
   const [selectedPlace, setSelectedPlace] = useState<Place[]>([]);
-
+  const [isLoadingSelectedPlaces, setIsLoadingSelectedPlaces] = useState(false);
   const setAdress = async () => {
     if (!navigator.geolocation) return;
     navigator.geolocation.getCurrentPosition(async (position) => {
@@ -90,6 +92,7 @@ const StepTwo = ({ wheelName }: { wheelName: string }) => {
   };
 
   const getPlaces = async () => {
+    setIsLoadingAdress(true);
     const places = (await getPlacesCall({
       lat: saveCoords ? saveCoords.lat : undefined,
       lng: saveCoords ? saveCoords.lng : undefined,
@@ -98,9 +101,11 @@ const StepTwo = ({ wheelName }: { wheelName: string }) => {
     })) as GetClosestRestaurantsResponse;
     console.log(places);
     setPlaces(places.data);
+    setIsLoadingAdress(false);
   };
 
   const saveWheel = async () => {
+    setIsLoadingSelectedPlaces(true);
     if (selectedPlace.length === 0) return;
 
     await auth.authStateReady();
@@ -132,6 +137,10 @@ const StepTwo = ({ wheelName }: { wheelName: string }) => {
     });
 
     console.log(user);
+    setIsLoadingSelectedPlaces(false);
+    return navigate({
+      to: `/wheels/${newWheel.id}`,
+    });
   };
 
   useEffect(() => {
@@ -139,12 +148,12 @@ const StepTwo = ({ wheelName }: { wheelName: string }) => {
   }, [adressReadable]);
 
   useEffect(() => {
-    console.log(selectedPlace);
+    console.log('selectedPlace', selectedPlace);
   }, [selectedPlace]);
 
   return (
     <div className="mx-4 flex h-[80vh] flex-col justify-center">
-      <div className="my-6 space-y-3">
+      <div className="relative top-0 my-6 space-y-3">
         <Input
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
@@ -154,8 +163,8 @@ const StepTwo = ({ wheelName }: { wheelName: string }) => {
             setAdress();
           }}
         />
-        <Button className="w-full" onClick={() => getPlaces()}>
-          Search
+        <Button className="w-full" onClick={() => getPlaces()} disabled={isLoadingAdress}>
+          {isLoadingAdress ? 'Searching...' : 'Search'}
         </Button>
       </div>
 
@@ -199,9 +208,11 @@ const StepTwo = ({ wheelName }: { wheelName: string }) => {
       <Button
         className="w-full"
         onClick={() => saveWheel()}
-        disabled={places.length === 0 || selectedPlace.length === 0}
+        disabled={
+          places.length === 0 || selectedPlace.length === 0 || isLoadingSelectedPlaces
+        }
       >
-        Save
+        {isLoadingSelectedPlaces ? 'Saving...' : 'Save'}
       </Button>
     </div>
   );

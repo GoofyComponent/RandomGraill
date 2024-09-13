@@ -25,7 +25,7 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ items, type }) => {
               <CardRoulette
                 id={0}
                 name="Add"
-                url="#"
+                url={`${window.location.origin}/wheels/new`}
                 variant="carousel"
                 usage="add"
                 clickable={true}
