@@ -8,7 +8,7 @@ interface StarsProps {
   note: number;
 }
 
-export const Stars: React.FC<StarsProps> = ({ note }) => {
+const Stars: React.FC<StarsProps> = ({ note }) => {
   const noteText = note.toFixed(1);
   const fullPizzas = Math.floor(note);
   const hasHalfPizza = note % 1 >= 0.5;
@@ -22,7 +22,6 @@ export const Stars: React.FC<StarsProps> = ({ note }) => {
       return <div key={i} className={cn('h-6 w-6')} />;
     }
   });
-
   return (
     <div className="flex items-center">
       Note Google : {noteText}
@@ -30,3 +29,5 @@ export const Stars: React.FC<StarsProps> = ({ note }) => {
     </div>
   );
 };
+
+export default Stars;

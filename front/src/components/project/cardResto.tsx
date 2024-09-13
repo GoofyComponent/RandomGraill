@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/dialog';
 
 import { Button } from '../ui/button';
-import { Stars } from '../ui/stars';
+import Stars from '../ui/stars';
 
 interface CardRestoProps {
   id: number;
@@ -108,22 +108,30 @@ const CardResto: React.FC<CardRestoProps> = ({
         <DialogHeader>
           <DialogTitle>{name}</DialogTitle>
         </DialogHeader>
-        <div>
-          <p>{type}</p>
-          <Stars className={name} note={note} />
+        <div className="align-item">
+          {type === undefined ? <p>No information</p> : <p>{type}</p>}
+          {note === undefined ? <p>No rating</p> : <Stars note={note} />}
           <img src={bgImage} />
-          <p>Prix moyen : {priceRange}</p>
+          {priceRange === undefined ? (
+            <p>No price range</p>
+          ) : (
+            <p>Price range : {priceRange}</p>
+          )}
         </div>
         <DialogDescription>{desc}</DialogDescription>
-        <DialogFooter className="sm:justify-center">
-          <Link to={mapLink} target="_blank">
+        <DialogFooter className="flex flex-col sm:flex-row">
+          <Link
+            className="mb-3 flex justify-center"
+            to={mapLink ? mapLink : ''}
+            target="_blank"
+          >
             <Button type="button">
               Maps <MapPin className="mr-2 h-5 w-6" />
             </Button>
           </Link>
-          <DialogClose asChild>
+          <DialogClose>
             <Button onClick={closeDialog} type="button">
-              Fermer
+              Close
             </Button>
           </DialogClose>
         </DialogFooter>
