@@ -49,7 +49,7 @@ const ResultRoulette: React.FC<ResultRouletteProps> = ({ result, show, setShow }
       <div className="mt-6 flex flex-col sm:flex-row">
         <Link
           className="mx-2"
-          to={`https://www.google.com/maps/place/?q=place_id:${result.place_id}`}
+          to={`http://maps.google.com/?q=${result.name}, ${result.vicinity}`}
           target="_blank"
           rel="noopener noreferrer"
         >
