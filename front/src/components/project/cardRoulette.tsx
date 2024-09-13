@@ -57,7 +57,7 @@ const CardRoulette: React.FC<CardRouletteProps> = ({
           className={`cardroulette absolute inset-0 z-0 h-full bg-cover bg-center transition-transform duration-300 ${
             clickable ? 'group-hover:scale-105' : ''
           }`}
-          style={{ backgroundImage: `url('/public/bgcardroulette.png')` }}
+          style={{ backgroundImage: `url('/bgcardroulette.png')` }}
         />
       )}
       {usage !== 'add' && (
