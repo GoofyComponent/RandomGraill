@@ -20,7 +20,7 @@ const Homepage: React.FC = () => {
   const { userData } = useLoaderData({
     from: '/_auth',
   });
-  const { wheels, favoriteWheel } = useLoaderData({
+  const { wheels, favoriteWheel, isAdmin } = useLoaderData({
     from: '/_auth/homepage',
   });
 
@@ -87,17 +87,21 @@ const Homepage: React.FC = () => {
         </Link>
         <CarouselCard items={wheels} type="cardRoulette" />
 
-        {closePlace.length ? (
+        {isAdmin ? (
           <>
-            <p className="flex flex-wrap pb-1 pt-2">Nerby restaurants</p>
-            <CarouselCard items={closePlace} type="cardResto" />
+            {closePlace.length ? (
+              <>
+                <p className="flex flex-wrap pb-1 pt-2">Nearby restaurants</p>
+                <CarouselCard items={closePlace} type="cardResto" />
+              </>
+            ) : (
+              <>
+                <p className="flex flex-wrap pb-1 pt-2">Nearby restaurants</p>
+                <p className="text-center">No restaurants found nearby</p>
+              </>
+            )}
           </>
-        ) : (
-          <>
-            <p className="flex flex-wrap pb-1 pt-2">Nerby restaurants</p>
-            <p className="text-center">No restaurants found nearby</p>
-          </>
-        )}
+        ) : null}
       </div>
     </div>
   );

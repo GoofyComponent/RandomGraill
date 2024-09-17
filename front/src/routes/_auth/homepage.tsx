@@ -8,18 +8,19 @@ import useUserStore from '@/stores/useUserStore';
 export const Route = createFileRoute('/_auth/homepage')({
   loader: async () => {
     const userId = useUserStore.getState().user?.uid;
-    const getUserWheels = await db2.user.get(userId as Schema2['user']['Id']);
+    const getUser = await db2.user.get(userId as Schema2['user']['Id']);
+    const isAdmin = getUser?.data.isAdmin || false;
 
-    const favoriteWheelId = getUserWheels?.data.favoriteWheels || null;
+    const favoriteWheelId = getUser?.data.favoriteWheels || null;
 
-    if (!getUserWheels || !getUserWheels.data.wheelsList) {
+    if (!getUser || !getUser.data.wheelsList) {
       return {
         wheelsId: [],
         wheels: [],
       };
     } else {
       const wheels = [];
-      for await (const wheelId of getUserWheels.data.wheelsList) {
+      for await (const wheelId of getUser.data.wheelsList) {
         const getWheelById = await db2.wheels.get(wheelId);
 
         if (getWheelById) {
@@ -42,7 +43,8 @@ export const Route = createFileRoute('/_auth/homepage')({
       }
 
       return {
-        wheelsId: getUserWheels.data.wheelsList.slice(0, 10),
+        isAdmin,
+        wheelsId: getUser.data.wheelsList.slice(0, 10),
         wheels: wheels.slice(0, 10),
         favoriteWheel: favoriteWheel,
       };

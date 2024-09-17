@@ -15,7 +15,7 @@ import useAuthStore from '@/stores/useUserStore';
 export const UserPage = () => {
   const navigate = useNavigate();
   const { userPreferences, updatePreferences } = useAuthStore();
-  const { userData } = useLoaderData({ from: '/_auth' });
+  const { userData, isAdmin } = useLoaderData({ from: '/_auth' });
 
   const [rangeArea, setRangeArea] = useState([userPreferences?.rangeArea ?? 1000]);
   const rangeAreaRef = useRef(rangeArea);
@@ -80,6 +80,7 @@ export const UserPage = () => {
             step={50}
           />
         </div>
+        {isAdmin ? <p>Role : Admin</p> : null}
         <Button
           onClick={async () => {
             try {

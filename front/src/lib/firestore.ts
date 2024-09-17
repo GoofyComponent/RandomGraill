@@ -17,6 +17,7 @@ export async function createOrGetUser(
       name: user.displayName ?? 'N/A',
       email: user.email ?? 'N/A',
       preferences: oldUser.data.preferences ?? { radius: 1000 },
+      isAdmin: oldUser.data.isAdmin ?? false,
       wheelsList: oldUser.data.wheelsList ?? [],
     });
   } else {
@@ -27,6 +28,7 @@ export async function createOrGetUser(
         radius: 1000,
       },
       wheelsList: [],
+      isAdmin: false,
     });
   }
 }
