@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-nocheck
-
 import { Link, useLoaderData } from '@tanstack/react-router';
 import { httpsCallable } from 'firebase/functions';
 import { ChevronRight } from 'lucide-react';
@@ -12,6 +9,18 @@ import { Wheel } from '@/components/project/wheel/wheel';
 import { functions } from '@/lib/firebase';
 import useUserStore from '@/stores/useUserStore';
 import { GetClosestRestaurantsResponse, Place } from '@/types/googleMaps';
+
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+
+import { Button } from '@/components/ui/button';
 
 const Homepage: React.FC = () => {
   const getPlacesCall = httpsCallable(functions, 'getClosestRestaurants');
@@ -25,6 +34,7 @@ const Homepage: React.FC = () => {
   });
 
   const [closePlace, setClosePlace] = React.useState<Place[]>([]);
+  const [openDialog, setOpenDialog] = React.useState(false);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(async (position) => {
@@ -40,15 +50,24 @@ const Homepage: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (!isAdmin) {
+      setOpenDialog(true);
+    }
+  }, [isAdmin]);
+
+  const closeDialog = () => {
+    setOpenDialog(false);
+  };
+
   return (
     <div>
-      <div>
-        <Navbar
-          userName={userData.displayName}
-          clickAvatarDirection="/account"
-          userPhoto={userData.photoURL}
-        />
-      </div>
+      <Navbar
+        userName={userData.displayName}
+        clickAvatarDirection="/account"
+        userPhoto={userData.photoURL}
+      />
+
       <div className="flex flex-wrap justify-center">
         {favoriteWheel && favoriteWheel.wheelId && (
           <>
@@ -79,6 +98,7 @@ const Homepage: React.FC = () => {
           </>
         )}
       </div>
+
       <div className="my-3 pl-3">
         <Link to="/wheels">
           <p className="flex flex-wrap pb-1 pt-2">
@@ -103,6 +123,28 @@ const Homepage: React.FC = () => {
           </>
         ) : null}
       </div>
+
+      {/* Message de maintenance pour les utilisateurs uniquement */}
+
+      <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="mb-5">App in maintenance</DialogTitle>
+            <DialogDescription className="text-left">
+              We are experiencing some difficulties at the moment, some features of the
+              application have been disabled, however if you already owned wheels you can
+              still spin them.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button onClick={closeDialog} type="button">
+                Close
+              </Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
