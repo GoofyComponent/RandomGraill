@@ -1,7 +1,7 @@
 import { Link, useLoaderData } from '@tanstack/react-router';
 import { httpsCallable } from 'firebase/functions';
 import { ChevronRight } from 'lucide-react';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import CarouselCard from '@/components/project/carouselCard';
 import Navbar from '@/components/project/navbar';
@@ -33,8 +33,8 @@ const Homepage: React.FC = () => {
     from: '/_auth/homepage',
   });
 
-  const [closePlace, setClosePlace] = React.useState<Place[]>([]);
-  const [openDialog, setOpenDialog] = React.useState(false);
+  const [closePlace, setClosePlace] = useState<Place[]>([]);
+  const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(async (position) => {
