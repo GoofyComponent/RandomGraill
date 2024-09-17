@@ -40,6 +40,7 @@ export interface User2 {
   preferences?: {
     radius: number;
   };
+  isAdmin?: boolean;
   wheelsList?: Schema['wheels']['Id'][];
   favoriteWheels?: Schema['wheels']['Id'];
 }
