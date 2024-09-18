@@ -68,40 +68,43 @@ const Homepage: React.FC = () => {
         userPhoto={userData.photoURL}
       />
 
-      <div className="flex flex-wrap justify-center">
-        {favoriteWheel && favoriteWheel.wheelId && (
-          <>
-            <p className="my-3 text-xl font-medium text-black">Favorite wheel</p>
-            <div className="h-5/6 w-5/6">
-              <Link to={`/wheels/${favoriteWheel.wheelId}`}>
-                <Wheel
-                  items={favoriteWheel?.restaurants.map(
-                    (restaurant: { name: string; place_id: string }) => ({
-                      name: restaurant.name,
-                      place_id: restaurant.place_id,
-                    }),
-                  )}
-                  colors={['#FF7549', '#F6C14B', '#ff7700']}
-                  buttonColor="#FEF4D7"
-                  buttonTextColor="#000000"
-                  buttonBorderColor="#FEF4D7"
-                  needleColor="#FEF4D7"
-                  buttonLabel="Spin"
-                  onResult={(name) => {
-                    console.log('name', name);
-                  }}
-                  wheelBorderColor="#FEF4D7"
-                  disabled
-                />
-              </Link>
-            </div>
-          </>
-        )}
+      <div className="mb-4 h-full w-full px-2 sm:px-0">
+        <div className="flex flex-wrap justify-center">
+          {favoriteWheel && favoriteWheel.wheelId && (
+            <>
+              <p className="my-3 text-xl font-medium text-black">Favorite wheel</p>
+              <div className="h-5/6 w-5/6">
+                <Link to={`/wheels/${favoriteWheel.wheelId}`}>
+                  <Wheel
+                    items={favoriteWheel?.restaurants.map(
+                      (restaurant: { name: string; place_id: string }) => ({
+                        name: restaurant.name,
+                        place_id: restaurant.place_id,
+                      }),
+                    )}
+                    colors={['#FF7549', '#F6C14B', '#ff7700']}
+                    buttonColor="#FEF4D7"
+                    buttonTextColor="#000000"
+                    buttonBorderColor="#FEF4D7"
+                    needleColor="#FEF4D7"
+                    buttonLabel="Spin"
+                    textStroke={false}
+                    onResult={(name) => {
+                      console.log('name', name);
+                    }}
+                    wheelBorderColor="#FEF4D7"
+                    disabled
+                  />
+                </Link>
+              </div>
+            </>
+          )}
+        </div>
       </div>
 
-      <div className="my-3 pl-3">
+      <div className="my-8 pl-2">
         <Link to="/wheels">
-          <p className="flex flex-wrap pb-1 pt-2">
+          <p className="flex flex-wrap pb-1">
             My wheels <ChevronRight />
           </p>
         </Link>
