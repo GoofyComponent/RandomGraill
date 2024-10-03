@@ -1,9 +1,8 @@
 import { Link } from '@tanstack/react-router';
+import { cva } from 'class-variance-authority';
 import { MapPin } from 'lucide-react';
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-import { Card, CardContent } from '@/components/ui/card';
 import {
   Dialog,
   DialogClose,
@@ -13,36 +12,66 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { cn } from '@/lib/utils';
 
 import { Button } from '../ui/button';
+import { Card, CardContent } from '../ui/card';
 import Stars from '../ui/stars';
 
 interface CardRestoProps {
   id: string;
-  bgImage: string | null;
+  image: string | null;
   name: string;
   type: string;
   note: number;
   priceRange: string;
   desc: string;
   mapLink: string;
-  headerBgColor?: string;
-  variant?: 'default' | 'carousel' | 'disabled' | 'selected';
   clickable?: boolean;
   onClick?: () => void;
   url?: string;
+  variant?: 'default' | 'selected' | 'disabled'; // Ajout de la propriété variant
+  size?: 'default' | 'md'; // Ajout de la propriété size
+  textSize?: 'default';
 }
 
+const cardRestoVariant = cva(
+  'group relative overflow-hidden transition-shadow shadow-lg ',
+  {
+    variants: {
+      variant: {
+        default: '',
+        selected: '',
+        disabled: '',
+      },
+      size: {
+        default: 'w-full text-xl ',
+        md: 'h-28 aspect-[6/4]',
+      },
+      textSize: {
+        default: 'text-xs sm:text-base md:text-lg',
+        xs: 'text-xs',
+        lg: 'text-lg',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      size: 'default',
+    },
+  },
+);
+
 const CardResto: React.FC<CardRestoProps> = ({
-  bgImage,
+  image,
   name,
   type,
   note,
   priceRange,
   desc,
   mapLink,
-  headerBgColor = 'bg-secondary',
   variant = 'default',
+  size = 'default',
+  textSize = 'default',
   clickable = true,
   onClick,
 }) => {
@@ -60,37 +89,29 @@ const CardResto: React.FC<CardRestoProps> = ({
   const cardContent = (
     <Card
       onClick={clickable ? openDialog : undefined}
-      className={`group relative ${variant === 'carousel' ? 'h-20' : 'h-24'} w-full overflow-hidden transition-shadow hover:shadow-lg`}
+      className={cn(
+        cardRestoVariant({ variant, size, textSize }),
+        clickable && 'cursor-pointer',
+      )}
     >
-      {variant === 'selected' && (
-        <div className="absolute inset-0 z-10 bg-primary opacity-50" />
-      )}
-      {variant === 'disabled' && (
-        <div className="absolute inset-0 z-10 bg-white opacity-50" />
-      )}
-
-      <div
-        className={`absolute inset-0 z-0 h-full bg-cover bg-center transition-transform duration-300 ${
-          clickable ? 'group-hover:scale-105' : ''
-        }`}
-        style={{ backgroundImage: `url(${bgImage || defaultImage})` }}
-      />
-      <CardContent className="relative z-20 flex h-full flex-col justify-between p-0 text-white">
-        <h3 className="text-xxs md:text-xs">
-          <span
-            className={`${headerBgColor} inline-block rounded-lg rounded-bl-none rounded-tr-none px-2 py-1`}
-          >
-            {name}
-          </span>
-        </h3>
-      </CardContent>
-      {!clickable && (
-        <div className="absolute right-2 top-2 z-20 text-white" onClick={openDialog}>
-          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-black bg-opacity-50">
-            <span className="text-xs">•••</span>
+      <CardContent className="relative z-20 flex h-full flex-col p-2 pb-1">
+        <img
+          className="h-auto w-full rounded-md object-cover"
+          src={image ? image : defaultImage}
+          alt={name}
+        />
+        <div className="flex items-center justify-between">
+          <div className="flex flex-col px-2 pt-1">
+            <div>{name}</div>
+            <div className="text-grey_text">{priceRange}</div>
           </div>
+          {!clickable && (
+            <span onClick={openDialog} className="cursor-pointer p-2">
+              •••
+            </span>
+          )}
         </div>
-      )}
+      </CardContent>
     </Card>
   );
 
@@ -105,7 +126,7 @@ const CardResto: React.FC<CardRestoProps> = ({
           {note === undefined ? <p>No rating</p> : <Stars note={note} />}
           <img
             className="mb-4 mt-4 aspect-video rounded object-cover"
-            src={bgImage ? bgImage : defaultImage}
+            src={image ? image : defaultImage}
           />
           {priceRange === undefined ? (
             <p>No price range</p>
@@ -134,19 +155,8 @@ const CardResto: React.FC<CardRestoProps> = ({
     </Dialog>
   );
 
-  return clickable ? (
-    <div
-      onClick={onClick}
-      className={`block w-full pb-2 ${variant === 'carousel' ? 'max-w-40' : 'max-w-52'}`}
-    >
-      {cardContent}
-      {dialogCard}
-    </div>
-  ) : (
-    <div
-      onClick={onClick}
-      className={`block w-full pb-2 ${variant === 'carousel' ? 'max-w-40' : 'max-w-52'}`}
-    >
+  return (
+    <div onClick={onClick} className={`block w-full pb-2`}>
       {cardContent}
       {dialogCard}
     </div>

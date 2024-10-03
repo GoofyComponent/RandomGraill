@@ -48,16 +48,17 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ items, type }) => {
                 />
               </CarouselItem>
             ) : (
-              <CarouselItem className="min-w-40">
+              <CarouselItem className="min-w-[45vw]">
                 <CardResto
                   id={item.reference}
-                  bgImage={item.photos && item.photos[0] ? item.photos[0].url : ''}
+                  image={item.image}
                   name={item.name}
-                  variant="carousel"
+                  variant="default"
+                  size="default"
                   clickable={true}
                   type={item.types && item.types[0] ? item.types[0] : ''}
                   note={item.rating}
-                  priceRange={item.price_level ? item.price_level.toString() : ''}
+                  priceRange={item.pricerange}
                   desc={item.vicinity}
                   mapLink={`http://maps.google.com/?q=${item.name}, ${item.vicinity}`}
                 />

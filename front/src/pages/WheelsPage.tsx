@@ -1,7 +1,7 @@
 import { useLoaderData } from '@tanstack/react-router';
 
 import CardRoulette from '@/components/project/cardRoulette.tsx';
-import Navbar from '@/components/project/navbar';
+import Header from '@/components/project/header';
 import { Place } from '@/types/googleMaps';
 
 export const WheelsPage = () => {
@@ -12,7 +12,7 @@ export const WheelsPage = () => {
 
   return (
     <div className="h-[calc(100vh-60px)] w-full">
-      <Navbar
+      <Header
         userName={userData.displayName}
         clickAvatarDirection="/account"
         userPhoto={userData.photoURL}

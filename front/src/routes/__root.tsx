@@ -1,6 +1,7 @@
 import { createRootRoute, Outlet, redirect } from '@tanstack/react-router';
 import React, { Suspense } from 'react';
 
+import Navbar from '@/components/project/navbar';
 import { auth } from '@/lib/firebase';
 
 export const Route = createRootRoute({
@@ -25,10 +26,13 @@ export const Route = createRootRoute({
   },
   component: () => (
     <>
-      <Outlet />
-      <Suspense>
-        <TanStackRouterDevtools />
-      </Suspense>
+      <div className="mb-16">
+        <Outlet />
+        <Suspense>
+          <TanStackRouterDevtools />
+        </Suspense>
+      </div>
+      <Navbar />
     </>
   ),
 });

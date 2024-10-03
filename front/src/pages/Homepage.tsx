@@ -4,12 +4,9 @@ import { ChevronRight } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
 import CarouselCard from '@/components/project/carouselCard';
-import Navbar from '@/components/project/navbar';
+import Header from '@/components/project/header';
 import { Wheel } from '@/components/project/wheel/wheel';
-import { functions } from '@/lib/firebase';
-import useUserStore from '@/stores/useUserStore';
-import { GetClosestRestaurantsResponse, Place } from '@/types/googleMaps';
-
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogClose,
@@ -19,8 +16,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-
-import { Button } from '@/components/ui/button';
+import { functions } from '@/lib/firebase';
+import useUserStore from '@/stores/useUserStore';
+import { GetClosestRestaurantsResponse, Place } from '@/types/googleMaps';
 
 const Homepage: React.FC = () => {
   const getPlacesCall = httpsCallable(functions, 'getClosestRestaurants');
@@ -62,7 +60,7 @@ const Homepage: React.FC = () => {
 
   return (
     <div>
-      <Navbar
+      <Header
         userName={userData.displayName}
         clickAvatarDirection="/account"
         userPhoto={userData.photoURL}

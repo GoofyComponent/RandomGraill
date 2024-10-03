@@ -18,11 +18,13 @@ module.exports = {
     },
     extend: {
       colors: {
+        grey_text: 'hsl(var(--gray-text))',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        dark_primary: 'hsl(var(--dark-primary))',
         fontFamily: {
           'poppins":': ['Poppins', 'sans-serif'],
         },

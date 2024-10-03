@@ -3,7 +3,7 @@ import { httpsCallable } from 'firebase/functions';
 import { useEffect, useState } from 'react';
 
 import CardResto from '@/components/project/cardResto';
-import Navbar from '@/components/project/navbar';
+import Header from '@/components/project/header';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { db2, Schema } from '@/db/baseSchema';
@@ -23,7 +23,7 @@ export const NewWheelPage = () => {
 
   return (
     <>
-      <Navbar
+      <Header
         userName={userData.displayName}
         clickAvatarDirection="/account"
         userPhoto={userData.photoURL}
@@ -167,7 +167,7 @@ const StepTwo = ({ wheelName }: { wheelName: string }) => {
             <div key={index} className="mb-2 w-1/2 px-1 sm:w-1/3 md:w-1/4 lg:w-1/5">
               <CardResto
                 id={item.reference}
-                bgImage={
+                image={
                   item.photos && item.photos[0]
                     ? item.photos[0].url
                     : '/images/restaurant.jpg'

@@ -27,6 +27,8 @@ type PlusCode = {
 };
 
 export type Place = {
+  pricerange: string;
+  image: string | null;
   business_status: string;
   geometry: Geometry;
   icon: string;

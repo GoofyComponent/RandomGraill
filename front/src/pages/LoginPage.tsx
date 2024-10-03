@@ -32,7 +32,7 @@ const LoginPage = () => {
   });
 
   return (
-    <main className="flex h-screen w-full flex-col items-center justify-center bg-background">
+    <main className="flex h-[calc(100dvh-4rem)] w-full flex-col items-center justify-center bg-background">
       <div className="mx-4 my-4">
         <img src={LOGO} alt="Logo RandomGraill" />
       </div>

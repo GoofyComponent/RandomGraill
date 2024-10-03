@@ -3,7 +3,7 @@ import { Star, StarOff } from 'lucide-react';
 import { useState } from 'react';
 
 import CardResto from '@/components/project/cardResto';
-import Navbar from '@/components/project/navbar';
+import Header from '@/components/project/header';
 import ResultRoulette from '@/components/project/resultRoulettes';
 import { Wheel } from '@/components/project/wheel/wheel';
 import { db2 } from '@/db/baseSchema';
@@ -41,7 +41,7 @@ export const UniqueWheelPage = () => {
   return (
     <div>
       <div>
-        <Navbar
+        <Header
           userName={userData.displayName}
           clickAvatarDirection="/account"
           userPhoto={userData.photoURL}
@@ -92,7 +92,7 @@ export const UniqueWheelPage = () => {
               <div key={index} className="mb-2 w-1/2 px-1 sm:w-1/3 md:w-1/4 lg:w-1/5">
                 <CardResto
                   id={item.reference}
-                  bgImage={item.photos && item.photos[0] ? item.photos[0].url : ''}
+                  image={item.photos && item.photos[0] ? item.photos[0].url : ''}
                   name={item.name}
                   clickable={true}
                   type={item.types && item.types[0] ? item.types[0] : ''}

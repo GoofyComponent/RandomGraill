@@ -6,13 +6,15 @@
 
 @layer base {
   :root {
-    --background: 44 85% 92%; /* #FEF4D7 in HSL */
+    --background: 0 0% 99.2%; /* #FDFDFD in HSL */
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
+    --gray-text: 0 0% 50.2%; /* #808080 in HSL */
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
     --primary: 14.4 100% 64.3%; /* #FF684D in HSL */
+    --dark-primary: 14.4 100% 41.6%; /* #D1533D in HSL */
     --primary-foreground: 210 40% 98%;
     --secondary: 14.4 100% 64.3%; /* #FF684D in HSL */
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -68,6 +70,7 @@
     @apply bg-background text-foreground;
 
     font-family: 'Poppins', sans-serif;
+    color: black;
   }
   .cardroulette {
     background-image: url('../images/bgcardroulette.png');
